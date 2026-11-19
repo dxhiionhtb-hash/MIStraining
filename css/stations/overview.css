@@ -1,0 +1,353 @@
+/**
+ * OVERVIEW / MATRIZ TÁCTICA DE APRENDIZAJE (VALORANT / DESTINY STYLE)
+ * Visualización sin muros de texto: Grafo interactivo SVG + tarjetas tácticas chamfered
+ */
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.tactical-matrix-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background: var(--bg-surface-card);
+  border: 1px solid var(--border-subtle);
+  clip-path: var(--chamfer-md);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-tactical);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Encabezado Táctico Limpio */
+.matrix-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: var(--space-3);
+}
+
+.matrix-header h2 {
+  font-size: var(--text-lg);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.matrix-header p {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  margin-top: 2px;
+}
+
+.matrix-sys-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent-cyan);
+  background: var(--accent-cyan-dim);
+  border: 1px solid var(--border-cyan);
+  padding: 3px 8px;
+  clip-path: var(--chamfer-sm);
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   Grafo Interactivo SVG Central: Matriz Táctica de Amenazas y Reflejos
+   ========================================================================== */
+.tactical-graph-container {
+  width: 100%;
+  background: var(--bg-deep);
+  border: 1px solid var(--border-tactical);
+  clip-path: var(--chamfer-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.tactical-svg-canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Nodos Tácticos en el SVG */
+.svg-interactive-node {
+  cursor: pointer;
+  transition: transform var(--transition-fast), filter var(--transition-fast);
+}
+
+.svg-interactive-node:hover {
+  filter: brightness(1.25);
+}
+
+.svg-interactive-node:hover circle {
+  stroke: var(--accent-cyan);
+  stroke-width: 2.5;
+}
+
+/* ==========================================================================
+   Lista de Tarjetas de Misión Táctica (Mission Cards)
+   ========================================================================== */
+.mission-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.mission-card-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-4);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  clip-path: var(--chamfer-sm);
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  transition: all var(--transition-fast);
+  min-height: 140px;
+}
+
+.mission-card-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: transparent;
+  transition: background var(--transition-fast);
+}
+
+.mission-card-item:hover {
+  background: var(--bg-surface-elevated);
+  border-color: var(--border-cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+}
+
+.mission-card-item:hover::before {
+  background: var(--accent-cyan);
+}
+
+.mission-card-item.completed {
+  border-color: rgba(0, 245, 212, 0.3);
+}
+
+.mission-card-item.completed::before {
+  background: var(--accent-cyan);
+}
+
+.mission-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mission-code {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  letter-spacing: 0.05em;
+}
+
+.mission-status-pill {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  clip-path: var(--chamfer-sm);
+}
+
+.mission-card-item.completed .mission-status-pill {
+  background: var(--accent-cyan-dim);
+  border-color: var(--border-cyan);
+  color: var(--accent-cyan);
+}
+
+.mission-card-mid h3 {
+  font-size: var(--text-sm);
+  font-weight: 800;
+  color: #ffffff;
+  margin-top: var(--space-2);
+  letter-spacing: 0.02em;
+}
+
+/* Micro-regla visual directa (sin exceso de texto) */
+.mission-card-rule {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.mission-card-rule .rule-icon {
+  color: var(--accent-cyan);
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.mission-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.mission-reflex-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.mission-card-action {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ==========================================================================
+   Panel Lateral de Telemetría Táctica
+   ========================================================================== */
+.overview-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.tactical-agent-card {
+  padding: var(--space-4);
+  background: var(--bg-surface-card);
+  border: 1px solid var(--border-subtle);
+  clip-path: var(--chamfer-md);
+  box-shadow: var(--shadow-tactical);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.agent-profile-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.agent-avatar-box {
+  width: 44px;
+  height: 44px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-tactical);
+  clip-path: var(--chamfer-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-cyan);
+}
+
+.agent-meta h4 {
+  font-size: var(--text-sm);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+}
+
+.agent-meta span {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.tactical-telemetry-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  background: var(--bg-deep);
+  padding: var(--space-3);
+  border: 1px solid var(--border-subtle);
+  clip-path: var(--chamfer-sm);
+}
+
+.telemetry-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.telemetry-item .t-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.telemetry-item .t-val {
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  font-weight: 800;
+  color: var(--accent-cyan);
+}
+
+/* Insignias Tácticas Desbloqueadas */
+.badges-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.badges-header-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.tactical-badges-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+}
+
+.t-badge-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 8px 10px;
+  background: var(--bg-deep);
+  border: 1px solid var(--border-subtle);
+  clip-path: var(--chamfer-sm);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.t-badge-item.unlocked {
+  border-color: var(--border-cyan);
+  color: var(--text-primary);
+  background: var(--accent-cyan-dim);
+}
+
+.t-badge-item.unlocked svg {
+  color: var(--accent-cyan);
+}

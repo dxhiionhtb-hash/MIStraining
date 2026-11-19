@@ -1,0 +1,132 @@
+/**
+ * GSAP EMBEDDED VECTOR MOTIONS - STRIPE / LINEAR / VERCEL AESTHETIC
+ * Sistema de diagramas vectoriales vivos embebidos para CyberShield 2026
+ */
+
+/* Contenedor del Diagrama Vectorial Vivo */
+.gsap-motion-card {
+  position: relative;
+  width: 100%;
+  background: var(--bg-surface-card);
+  border: 1px solid var(--border-tactical);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), var(--shadow-tactical);
+  transition: border-color 0.25s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  margin-bottom: 20px;
+}
+
+.gsap-motion-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.gsap-motion-card.is-active {
+  border-color: rgba(34, 197, 94, 0.35);
+}
+
+/* Header del Diagrama */
+.gsap-motion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  background: rgba(14, 20, 31, 0.95);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.gsap-motion-title {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gsap-motion-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: var(--accent-green);
+}
+
+.gsap-motion-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.gsap-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: 0 0 6px var(--accent-green);
+}
+
+/* Área de Visualización SVG Responsivo */
+.gsap-svg-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 800 / 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.03) 0%, #0c1017 85%);
+  cursor: default;
+}
+
+.gsap-svg-stage svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Reglas Estrictas para Cero Bugs Geométricos en Transformaciones SVG */
+.gsap-svg-stage svg [data-animate-rotate],
+.gsap-svg-stage svg [data-animate-scale],
+.gsap-svg-stage svg [data-animate-transform] {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Micro-interacción reactiva en Hover del SVG */
+.gsap-svg-stage:hover svg .gsap-hover-glow {
+  filter: drop-shadow(0 0 10px rgba(34, 197, 94, 0.4));
+  transition: filter 0.3s ease;
+}
+
+/* Pie Informativo Táctico Nivel Linear */
+.gsap-motion-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 18px;
+  background: rgba(12, 16, 23, 0.95);
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.gsap-motion-footer span.legend {
+  color: var(--text-secondary);
+}
+
+.gsap-motion-footer span.fps-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--accent-cyan);
+}

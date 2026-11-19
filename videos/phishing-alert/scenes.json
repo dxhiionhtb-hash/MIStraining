@@ -1,0 +1,98 @@
+{
+ "style": "flat2d",
+ "fps": 30,
+ "format": "9:16",
+ "duration": 25,
+ "notes": "Flat 2D 25-second cinematic awareness short on Phishing. Office environment, Carlos character, suspicious email alert, forensic domain zoom, SOC team Sofia intervention, zero-click stat card.",
+ "scenes": [
+  {
+   "id": "routine",
+   "type": "process",
+   "label": "PRESIÓN Y RUTINA",
+   "title": "Carlos cierra su semana",
+   "highlight": "semana",
+   "visual": "Carlos typing in modern warm office with window sunset, steaming coffee and floating dust particles",
+   "keys": [
+    {
+     "id": "typing",
+     "t": 1.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 0,
+   "t1": 5
+  },
+  {
+   "id": "urgency",
+   "type": "question",
+   "label": "URGENCIA EXTREMA",
+   "title": "Correo urgente de nómina",
+   "highlight": "nómina",
+   "visual": "screen flickers with a pulsing red email badge, ticking hourglass, dark hacker silhouette in shadows",
+   "keys": [
+    {
+     "id": "alert",
+     "t": 6.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 5,
+   "t1": 10
+  },
+  {
+   "id": "forensic",
+   "type": "process",
+   "label": "EL ENGAÑO OCULTO",
+   "title": "El remitente suplanta dominio",
+   "highlight": "dominio",
+   "visual": "macro zoom into browser address bar revealing fake spoof domain and a sharp phishing hook dropping",
+   "keys": [
+    {
+     "id": "hook",
+     "t": 11.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 10,
+   "t1": 15
+  },
+  {
+   "id": "action",
+   "type": "process",
+   "label": "PROTOCOLO ACTIVO",
+   "title": "Reporta directo a seguridad",
+   "highlight": "seguridad",
+   "visual": "Carlos pulls hand away, SOC analyst Sofia raises an expanding blue energy barrier cutting the fishing line",
+   "keys": [
+    {
+     "id": "shield",
+     "t": 16.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 15,
+   "t1": 20
+  },
+  {
+   "id": "golden_rule",
+   "type": "stat",
+   "label": "REGLA DE ORO",
+   "title": "Tu cautela salva la empresa",
+   "highlight": "empresa",
+   "visual": "warm serene office restored with glowing green shield and Carlos giving thumbs up",
+   "stat": {
+    "value": "0 CLICS",
+    "text": "Verifica siempre antes de confiar"
+   },
+   "keys": [
+    {
+     "id": "stat",
+     "t": 21.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 20,
+   "t1": 25
+  }
+ ]
+}

@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0e14">
+  <title>CyberShield // CyberShorts Studio (Cápsulas 25s • Flat 2D)</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Tactical Styles -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/shorts.css">
+
+  <style>
+    /* Estilos adicionales para Guion, Audio Ducking y Personajes */
+    .audio-control-pills {
+      display: flex;
+      gap: 6px;
+      margin-left: 8px;
+    }
+    .pill-toggle {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      font-size: 0.72rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.15s ease;
+    }
+    .pill-toggle.active {
+      background: rgba(0, 242, 254, 0.15);
+      border-color: #00f2fe;
+      color: #00f2fe;
+    }
+    .pill-toggle.voice-active {
+      background: rgba(255, 200, 61, 0.18);
+      border-color: #ffc83d;
+      color: #ffc83d;
+    }
+    .script-viewer-box {
+      background: #090e17;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .script-line-item {
+      display: flex;
+      gap: 12px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.02);
+      border-left: 3px solid transparent;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .script-line-item:hover {
+      background: rgba(255,255,255,0.05);
+    }
+    .script-line-item.active {
+      background: rgba(255, 200, 61, 0.1);
+      border-left-color: #ffc83d;
+    }
+    .script-speaker-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #ffc83d;
+      min-width: 90px;
+    }
+    .script-dialogue-text {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      line-height: 1.35;
+    }
+    .script-line-item.active .script-dialogue-text {
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .audio-ducking-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #111827;
+      color: #64748b;
+    }
+    .audio-ducking-indicator.ducked {
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.15);
+    }
+    .voicebox-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #10b981;
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+    }
+    .voicebox-status-pill .pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 6px #10b981;
+    }
+  </style>
+
+  <!-- GSAP 3.12 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+<body class="shorts-page-body">
+
+  <div class="shorts-viewport">
+    <!-- Header -->
+    <header class="shorts-header">
+      <div class="shorts-brand">
+        <div class="shorts-logo-icon">📱</div>
+        <div class="shorts-title-group">
+          <h1>CyberShorts Studio <span style="color:#ffc83d; font-size: 0.9em;">// Flat 2D (25 Segundos)</span></h1>
+          <p>Cápsulas narrativas de concientización vertical: personajes, escenarios de oficina/SOC, voz en español latino con Voicebox local, auto-ducking musical y VFX dinámicos a 60 fps.</p>
+        </div>
+      </div>
+
+      <div class="shorts-nav-actions">
+        <div class="voicebox-status-pill" title="Modelo de voz humana natural (Jorge & Dalia Neural) vía Voicebox en http://127.0.0.1:17493">
+          <span class="pulse-dot"></span>
+          <span>VOICEBOX NEURAL HUMANO (ES-MX)</span>
+        </div>
+        <a href="index.html" class="shorts-btn shorts-btn-outline">
+          <span>← Centro de Operaciones SOC</span>
+        </a>
+        <a href="preview-motions.html" class="shorts-btn shorts-btn-outline">
+          <span>📐 Micro-Animaciones</span>
+        </a>
+        <button id="toggleSafeGuideBtn" class="shorts-btn shorts-btn-outline" title="Alternar guías de safe zone para TikTok / Shorts">
+          <span>🎯 Safe Zone (9:16)</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Studio Grid -->
+    <main class="shorts-studio-layout">
+
+      <!-- Column 1: Mobile Device Player -->
+      <section class="shorts-device-col">
+        <div class="phone-mockup">
+          <!-- Dynamic Island / Top Camera -->
+          <div class="phone-dynamic-island">
+            <div class="camera-lens"></div>
+          </div>
+
+          <!-- Screen Frame (1080x1920 scaled to device) -->
+          <div class="phone-screen" id="phoneScreen">
+            <div id="f2-root">
+              <!-- Safe Zone Guides Overlay -->
+              <div class="f2-safe-guide" id="safeGuideOverlay">
+                <div class="safe-top"></div>
+                <div class="safe-bottom"></div>
+                <div class="safe-left"></div>
+                <div class="safe-right"></div>
+                <div class="safe-badge-pill">SAFE ZONE 80-1000 × 160-1600</div>
+              </div>
+
+              <!-- Scene Container (Populated dynamically by Flat 2D Engine) -->
+              <div id="scenesContainer"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- External Player Controls -->
+        <div class="phone-controls">
+          <div class="scrubber-row">
+            <input type="range" id="timelineScrubber" class="scrubber-slider" min="0" max="25" step="0.05" value="0">
+            <span class="time-display" id="timeDisplay">00.0s / 25.0s</span>
+          </div>
+
+          <div class="ctrl-btn-row">
+            <div class="ctrl-btn-group">
+              <button class="ctrl-btn" id="btnRestart" title="Reiniciar">⏮</button>
+              <button class="ctrl-btn" id="btnPlayPause" title="Reproducir / Pausar">▶</button>
+              <button class="ctrl-btn" id="btnStepFwd" title="Avanzar 2 segundos">⏩</button>
+            </div>
+
+            <div class="audio-control-pills">
+              <button type="button" class="pill-toggle voice-active" id="btnVoiceToggle" title="Voz Humana Natural Neural (es-MX)">🎙️ Voz Humana</button>
+              <button type="button" class="pill-toggle active" id="btnMusicToggle" title="Activar/Silenciar Música con Auto-Ducking">🎵 Música</button>
+              <button type="button" class="pill-toggle active" id="btnSfxToggle" title="Activar/Silenciar Efectos de Sonido">🔊 SFX</button>
+            </div>
+
+            <div class="ctrl-btn-group">
+              <select class="speed-select" id="speedSelect" title="Velocidad de reproducción">
+                <option value="0.5">0.5x</option>
+                <option value="1" selected>1.0x</option>
+                <option value="1.25">1.25x</option>
+                <option value="1.5">1.5x</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+            <span class="audio-ducking-indicator" id="duckingBadge">
+              <span>DUCKING:</span>
+              <strong id="duckingStateText">NORMAL (-20dB)</strong>
+            </span>
+            <span style="font-size: 0.72rem; color: #64748b; font-family: monospace;">CANALES: VOZ LOCAL WAV + SYNTH + SFX</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Column 2: Tactical Console & Storyboard Inspector -->
+      <section class="shorts-console-col">
+
+        <!-- Topic Selector Card -->
+        <div class="console-card">
+          <div class="console-card-header">
+            <div class="console-card-title">
+              <span>Cápsulas de Concientización Cinemáticas</span>
+              <span class="badge">DURACIÓN: 25 SEGUNDOS</span>
+            </div>
+          </div>
+
+          <div class="topic-grid">
+            <!-- Topic 1: Phishing -->
+            <div class="topic-card active" data-topic="phishing">
+              <div class="topic-card-header">
+                <span class="topic-icon">🎣</span>
+                <div>
+                  <div class="topic-name">Alerta de Phishing</div>
+                  <div class="topic-slug">videos/phishing-alert (25s)</div>
+                </div>
+              </div>
+              <div class="topic-desc">Carlos en la oficina de noche, falsa urgencia de nómina, zoom forense y corte por el SOC.</div>
+            </div>
+
+            <!-- Topic 2: BadUSB -->
+            <div class="topic-card" data-topic="badusb">
+              <div class="topic-card-header">
+                <span class="topic-icon">💾</span>
+                <div>
+                  <div class="topic-name">Amenaza BadUSB</div>
+                  <div class="topic-slug">videos/badusb-alert (25s)</div>
+                </div>
+              </div>
+              <div class="topic-desc">Cebo en el pasillo, tentación de etiqueta, microcontrolador de inyección y aislamiento en bóveda.</div>
+            </div>
+
+            <!-- Topic 3: Ransomware -->
+            <div class="topic-card" data-topic="ransomware">
+              <div class="topic-card-header">
+                <span class="topic-icon">🔒</span>
+                <div>
+                  <div class="topic-name">Bloqueo Ransomware</div>
+                  <div class="topic-slug">videos/ransomware-alert (25s)</div>
+                </div>
+              </div>
+              <div class="topic-desc">Cursor congelado, nota carmesí de secuestro, corte de cable ethernet y backup inmutable.</div>
+            </div>
+
+            <!-- Topic 4: AI Safety -->
+            <div class="topic-card" data-topic="ai-safety">
+              <div class="topic-card-header">
+                <span class="topic-icon">🛡️</span>
+                <div>
+                  <div class="topic-name">Seguridad en IA</div>
+                  <div class="topic-slug">videos/ai-safety-alert (25s)</div>
+                </div>
+              </div>
+              <div class="topic-desc">Revisión de contratos en IA pública, fuga neuronal hacia competidores y enclave corporativo.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Storyboard Strip Card -->
+        <div class="console-card">
+          <div class="console-card-header">
+            <div class="console-card-title">
+              <span>Storyboard 5 Paneles (25 Segundos • 5s c/u)</span>
+              <span class="badge" id="currentTopicBadge">PHISHING-ALERT (25s)</span>
+            </div>
+            <a id="btnViewStoryboardImg" href="videos/phishing-alert/storyboard.png" target="_blank" class="shorts-btn shorts-btn-outline" style="padding: 4px 10px; font-size: 0.75rem;">
+              <span>🖼️ Ver PNG Completo</span>
+            </a>
+          </div>
+
+          <div class="scene-steps-strip" id="storyboardStrip">
+            <!-- Populated dynamically with 5 scene step cards -->
+          </div>
+        </div>
+
+        <!-- Script & Dialogue Synchronizer Card -->
+        <div class="console-card">
+          <div class="console-card-header">
+            <div class="console-card-title">
+              <span>Guion Narrativo & Locución en Español Latino</span>
+              <span class="badge" style="background: rgba(255, 200, 61, 0.15); color: #ffc83d;">VOZ HUMANA NATURAL (JORGE NEURAL)</span>
+            </div>
+          </div>
+
+          <p style="font-size: 0.82rem; color: #94a3b8; margin: 0 0 4px 0;">
+            Narración dramática sintetizada en local, sincronizada línea por línea con las escenas visuales y auto-ducking musical:
+          </p>
+
+          <div class="script-viewer-box" id="scriptViewer">
+            <!-- Populated dynamically with script lines -->
+          </div>
+        </div>
+
+        <!-- Pipeline Automation Hub -->
+        <div class="console-card">
+          <div class="console-card-header">
+            <div class="console-card-title">
+              <span>Comandos de Generación de la Cápsula (25 Segundos)</span>
+              <span class="badge">ESTILO FLAT 2D</span>
+            </div>
+          </div>
+          <div class="cli-box">
+            <div class="cli-code" id="cliVoiceCmd">node core/voice.ts videos/phishing-alert</div>
+            <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('cliVoiceCmd').innerText)" title="Copiar">📋</button>
+          </div>
+          <div class="cli-box">
+            <div class="cli-code" id="cliScenesCmd">node core/scenes.ts videos/phishing-alert</div>
+            <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('cliScenesCmd').innerText)" title="Copiar">📋</button>
+          </div>
+          <div class="cli-box">
+            <div class="cli-code" id="cliStoryboardCmd">node core/storyboard.ts videos/phishing-alert</div>
+            <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('cliStoryboardCmd').innerText)" title="Copiar">📋</button>
+          </div>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <!-- Script: Flat 2D Engine with 25s Timelines, Web Audio Ducking, SFX, and Local Voice Synthesis -->
+  <script>
+    const F2 = {
+      blue: '#4c7dff',
+      blueD: '#2f55c9',
+      sky: '#5fb6f5',
+      skyD: '#3a8fd8',
+      night: '#14213d',
+      yellow: '#ffc83d',
+      orange: '#ff8a3d',
+      red: '#ff5a5f',
+      green: '#3ccf91',
+      greenD: '#24a872',
+      purple: '#8b6cff',
+      pink: '#ff7eb6',
+      white: '#ffffff',
+      cream: '#fff4dc',
+      gray: '#c9d3ea'
+    };
+
+    const svgWrap = (body) => `<svg viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">${body}</svg>`;
+    const f2Pop = (tl, sel, t, d = 0.45) => tl.fromTo(sel, { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: d, ease: 'back.out(2)' }, t);
+
+    /* =====================================================================
+       AUDIO ENGINE: Local Voicebox Audio (.wav) + Ambient Synth + Ducking + SFX
+       ===================================================================== */
+    let audioCtx = null;
+    let voiceEnabled = true;
+    let musicEnabled = true;
+    let sfxEnabled = true;
+
+    let musicMasterGain = null;
+    let musicOscillators = [];
+    let isMusicPlaying = false;
+    let isDucked = false;
+
+    // Local Voicebox Audio (.wav) Player
+    const voiceAudio = new Audio();
+    voiceAudio.preload = 'auto';
+
+    voiceAudio.addEventListener('play', () => {
+      setDucking(true);
+    });
+    voiceAudio.addEventListener('pause', () => {
+      setDucking(false);
+    });
+    voiceAudio.addEventListener('ended', () => {
+      setDucking(false);
+    });
+    voiceAudio.addEventListener('error', (e) => {
+      console.warn('[Audio] Voicebox WAV could not be played directly; falling back to SpeechSynthesis', e);
+    });
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    // 1. Synthwave Background Music Loop with Auto-Ducking
+    function initMusic() {
+      const ctx = getAudioContext();
+      if (musicMasterGain) return;
+
+      musicMasterGain = ctx.createGain();
+      musicMasterGain.gain.setValueAtTime(0.08, ctx.currentTime);
+      musicMasterGain.connect(ctx.destination);
+    }
+
+    function startAmbientMusic() {
+      if (!musicEnabled || isMusicPlaying) return;
+      const ctx = getAudioContext();
+      initMusic();
+
+      stopAmbientMusic();
+
+      // Cyber ambient chord progression (Dm -> Bb -> F -> C)
+      const baseFreqs = [146.83, 220.0, 261.63, 329.63];
+      musicOscillators = baseFreqs.map((f, i) => {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = i % 2 === 0 ? 'sine' : 'triangle';
+        osc.frequency.value = f;
+        g.gain.setValueAtTime(0.04, ctx.currentTime);
+        osc.connect(g);
+        g.connect(musicMasterGain);
+        osc.start();
+        return osc;
+      });
+      isMusicPlaying = true;
+    }
+
+    function stopAmbientMusic() {
+      if (musicOscillators.length) {
+        musicOscillators.forEach(o => {
+          try { o.stop(); o.disconnect(); } catch (e) {}
+        });
+        musicOscillators = [];
+      }
+      isMusicPlaying = false;
+    }
+
+    // Auto-Ducking (Compresses music during speech/SFX)
+    function setDucking(ducked) {
+      if (!musicMasterGain || !audioCtx) return;
+      isDucked = ducked;
+      const targetGain = ducked ? 0.02 : (musicEnabled ? 0.08 : 0.0);
+      musicMasterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+      musicMasterGain.gain.linearRampToValueAtTime(targetGain, audioCtx.currentTime + 0.25);
+
+      const badge = document.getElementById('duckingBadge');
+      const text = document.getElementById('duckingStateText');
+      if (badge && text) {
+        if (ducked) {
+          badge.classList.add('ducked');
+          text.innerText = 'DUCKED (-28dB)';
+        } else {
+          badge.classList.remove('ducked');
+          text.innerText = 'NORMAL (-20dB)';
+        }
+      }
+    }
+
+    // 2. Synthesized Tactical Sound Effects (SFX)
+    function playSfx(type) {
+      if (!sfxEnabled) return;
+      const ctx = getAudioContext();
+      const now = ctx.currentTime;
+
+      if (type === 'click') {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(1200, now);
+        osc.frequency.exponentialRampToValueAtTime(300, now + 0.06);
+        g.gain.setValueAtTime(0.15, now);
+        g.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+        osc.connect(g);
+        g.connect(ctx.destination);
+        osc.start();
+        osc.stop(now + 0.06);
+      } else if (type === 'alert') {
+        setDucking(true);
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(880, now);
+        osc.frequency.setValueAtTime(660, now + 0.12);
+        g.gain.setValueAtTime(0.12, now);
+        g.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        osc.connect(g);
+        g.connect(ctx.destination);
+        osc.start();
+        osc.stop(now + 0.35);
+        setTimeout(() => setDucking(false), 400);
+      } else if (type === 'sparks') {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(320, now);
+        osc.frequency.exponentialRampToValueAtTime(1400, now + 0.18);
+        g.gain.setValueAtTime(0.08, now);
+        g.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+        osc.connect(g);
+        g.connect(ctx.destination);
+        osc.start();
+        osc.stop(now + 0.18);
+      } else if (type === 'lock') {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(180, now);
+        osc.frequency.exponentialRampToValueAtTime(60, now + 0.25);
+        g.gain.setValueAtTime(0.2, now);
+        g.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        osc.connect(g);
+        g.connect(ctx.destination);
+        osc.start();
+        osc.stop(now + 0.25);
+      } else if (type === 'success') {
+        const osc = ctx.createOscillator();
+        const g = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, now);
+        osc.frequency.setValueAtTime(659.25, now + 0.1);
+        osc.frequency.setValueAtTime(783.99, now + 0.2);
+        g.gain.setValueAtTime(0.1, now);
+        g.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+        osc.connect(g);
+        g.connect(ctx.destination);
+        osc.start();
+        osc.stop(now + 0.45);
+      }
+    }
+
+    // Fallback: Web Speech API if WAV is absent
+    function speakSpanishFallback(text) {
+      if (!voiceEnabled || !('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'es-MX';
+      utter.rate = 1.1;
+      utter.pitch = 1.0;
+
+      const voices = window.speechSynthesis.getVoices();
+      const esVoice = voices.find(v => v.lang.startsWith('es') || v.name.includes('Hilda'));
+      if (esVoice) utter.voice = esVoice;
+
+      utter.onstart = () => setDucking(true);
+      utter.onend = () => setDucking(false);
+      utter.onerror = () => setDucking(false);
+
+      window.speechSynthesis.speak(utter);
+    }
+
+    /* =====================================================================
+       25-SECOND CYBER AWARENESS SHORTS DATA (5 DYNAMIC SCENES EACH)
+       ===================================================================== */
+    const VIDEOS = {
+      phishing: {
+        id: 'phishing-alert',
+        name: 'Alerta de Phishing',
+        duration: 25.0,
+        scenes: [
+          {
+            id: 'routine', t0: 0.0, t1: 5.0,
+            speaker: 'Carlos',
+            dialogue: 'Viernes en la oficina. Carlos termina sus pendientes para salir a descansar.',
+            label: 'PRESIÓN Y RUTINA', title: 'Carlos cierra su semana', highlight: 'semana',
+            bg: '#1c2944',
+            sfx: 'click',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="#1c2944"/>
+              
+              <!-- Office Window with Sunset Skyline -->
+              <g id="officeWindow" transform="translate(140 680)">
+                <rect x="0" y="0" width="800" height="420" rx="20" fill="#0b172a"/>
+                <rect x="15" y="15" width="770" height="390" rx="14" fill="${F2.sky}"/>
+                <circle cx="560" cy="220" r="110" fill="${F2.orange}"/>
+                <circle cx="560" cy="220" r="90" fill="${F2.yellow}"/>
+                <rect x="80" y="160" width="110" height="245" fill="#1e3a66"/>
+                <rect x="210" y="100" width="140" height="305" fill="#152b4d"/>
+                <rect x="370" y="180" width="100" height="225" fill="#1b345c"/>
+                <rect x="490" y="120" width="130" height="285" fill="#152b4d"/>
+                <rect x="640" y="210" width="120" height="195" fill="#1e3a66"/>
+                <line x1="400" y1="15" x2="400" y2="405" stroke="#0b172a" stroke-width="14"/>
+                <line x1="15" y1="210" x2="785" y2="210" stroke="#0b172a" stroke-width="14"/>
+              </g>
+
+              <!-- Office Desk & Lamp -->
+              <g id="deskSetup" transform="translate(100 1100)">
+                <rect x="0" y="120" width="880" height="40" rx="10" fill="#8b5a2b"/>
+                <rect x="40" y="160" width="30" height="320" fill="#654321"/>
+                <rect x="810" y="160" width="30" height="320" fill="#654321"/>
+
+                <!-- Plant on left -->
+                <rect x="60" y="50" width="50" height="70" rx="6" fill="#e2e8f0"/>
+                <circle cx="70" cy="20" r="24" fill="${F2.green}"/>
+                <circle cx="95" cy="10" r="28" fill="${F2.greenD}"/>
+                <circle cx="105" cy="35" r="22" fill="${F2.green}"/>
+
+                <!-- Steaming Coffee Cup on right -->
+                <g id="coffeeCup" transform="translate(730 65)">
+                  <rect x="0" y="0" width="45" height="55" rx="8" fill="${F2.white}"/>
+                  <path d="M45 10 C60 10, 60 35, 45 35" stroke="${F2.white}" stroke-width="7" fill="none"/>
+                  <path id="steam1" d="M15 -10 Q25 -25 15 -40" stroke="#cbd5e1" stroke-width="4" fill="none" opacity="0.6"/>
+                  <path id="steam2" d="M30 -8 Q20 -25 30 -42" stroke="#cbd5e1" stroke-width="4" fill="none" opacity="0.6"/>
+                </g>
+
+                <!-- Laptop & Carlos Character -->
+                <g id="carlosChar" transform="translate(340 -40)">
+                  <rect x="-80" y="0" width="160" height="190" rx="24" fill="#334155"/>
+                  <rect x="-60" y="60" width="120" height="120" rx="28" fill="${F2.blue}"/>
+                  <g id="carlosHead">
+                    <circle cx="0" cy="0" r="46" fill="#f8c8a0"/>
+                    <path d="M-46 -10 Q0 -65 46 -10 Q25 -40 0 -38 Q-25 -40 -46 -10 Z" fill="#2d1c16"/>
+                    <circle cx="18" cy="-6" r="5" fill="#14213d"/>
+                    <path d="M12 12 Q20 22 28 12" stroke="#14213d" stroke-width="4" fill="none" stroke-linecap="round"/>
+                  </g>
+                  <g id="typingArm">
+                    <path d="M30 90 L85 130 L115 115" stroke="${F2.blue}" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="118" cy="115" r="10" fill="#f8c8a0"/>
+                  </g>
+                  <rect x="70" y="80" width="14" height="60" rx="4" fill="#64748b" transform="rotate(-18 70 80)"/>
+                  <rect x="60" y="130" width="120" height="12" rx="4" fill="#94a3b8"/>
+                </g>
+              </g>
+
+              <g id="particles">
+                <circle cx="320" cy="850" r="5" fill="#ffc83d" opacity="0.6"/>
+                <circle cx="780" cy="920" r="4" fill="#ffc83d" opacity="0.5"/>
+                <circle cx="520" cy="780" r="6" fill="#ffffff" opacity="0.4"/>
+              </g>
+            `),
+            anim(tl, s, $) {
+              f2Pop(tl, $('#officeWindow'), s.t0 + 0.1, 0.6);
+              tl.fromTo($('#deskSetup'), { y: 120, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'back.out(1.8)' }, s.t0 + 0.25);
+              tl.to($('#typingArm'), { rotation: 12, transformOrigin: '30px 90px', duration: 0.13, repeat: 28, yoyo: true, ease: 'sine.inOut' }, s.t0 + 0.4);
+              tl.to($('#carlosHead'), { y: 4, duration: 0.6, repeat: 6, yoyo: true, ease: 'sine.inOut' }, s.t0 + 0.4);
+              tl.to($('#steam1, #steam2'), { y: -25, scaleY: 1.25, opacity: 0, duration: 1.3, repeat: 3, stagger: 0.35, ease: 'power1.out' }, s.t0 + 0.5);
+              tl.to($('#particles circle'), { y: -30, duration: 2.2, repeat: 1, yoyo: true, stagger: 0.3 }, s.t0 + 0.2);
+            }
+          },
+          {
+            id: 'urgency', t0: 5.0, t1: 10.0,
+            speaker: 'Atacante',
+            dialogue: 'Una alerta urgente interrumpe: actualiza tu nómina en quince minutos o pierdes tu pago.',
+            label: 'URGENCIA EXTREMA', title: 'Correo urgente de nómina', highlight: 'nómina',
+            bg: '#0c1527',
+            sfx: 'alert',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="#0c1527"/>
+              <g id="hackerShadow" transform="translate(540 680)">
+                <path d="M-120 180 C-120 60, -80 0, 0 0 C80 0, 120 60, 120 180 Z" fill="#080e1a"/>
+                <path d="M-80 90 Q0 -30 80 90 Q40 40 0 40 Q-40 40 -80 90 Z" fill="#050a14"/>
+                <g id="hackerEyes">
+                  <polygon points="-30,65 -15,75 -35,80" fill="${F2.yellow}"/>
+                  <polygon points="30,65 15,75 35,80" fill="${F2.yellow}"/>
+                </g>
+              </g>
+              <g id="alertMonitor" transform="translate(540 1080)">
+                <rect x="-440" y="-260" width="880" height="520" rx="36" fill="#111c30" stroke="#ff0055" stroke-width="8"/>
+                <rect x="-410" y="-230" width="820" height="460" rx="22" fill="#2d121c"/>
+                <g id="urgentEmailBox" transform="translate(0 -20)">
+                  <rect x="-340" y="-140" width="680" height="280" rx="24" fill="${F2.white}"/>
+                  <path id="urgentHeader" d="M-340 -140 L340 -140 L340 -50 L-340 -50 Z" fill="${F2.red}"/>
+                  <text x="-290" y="-85" font-family="'Nunito', Arial, sans-serif" font-weight="900" font-size="34" fill="#fff">⚠ ALERTA DE NÓMINA // URGENTE</text>
+                  <rect x="-290" y="-20" width="460" height="18" rx="9" fill="#64748b"/>
+                  <rect x="-290" y="15" width="580" height="16" rx="8" fill="#94a3b8"/>
+                  <g id="urgentCountdown" transform="translate(180 100)">
+                    <rect x="-100" y="-25" width="200" height="48" rx="10" fill="#1e293b"/>
+                    <text x="0" y="8" font-family="'JetBrains Mono', monospace" font-weight="800" font-size="26" fill="#ff5a5f" text-anchor="middle">⏱ 14:59</text>
+                  </g>
+                  <g id="fakeButton" transform="translate(-130 100)">
+                    <rect x="-140" y="-25" width="280" height="50" rx="14" fill="${F2.red}"/>
+                    <text x="0" y="8" font-family="'Nunito', Arial, sans-serif" font-weight="900" font-size="22" fill="#fff" text-anchor="middle">ACTUALIZAR AHORA</text>
+                  </g>
+                </g>
+              </g>
+            `),
+            anim(tl, s, $) {
+              tl.fromTo($('#hackerShadow'), { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, s.t0 + 0.1);
+              tl.fromTo($('#hackerEyes polygon'), { fill: '#ffc83d' }, { fill: '#ff0055', duration: 0.25, repeat: 14, yoyo: true }, s.t0 + 0.3);
+              tl.fromTo($('#alertMonitor'), { scale: 0.65, y: 140 }, { scale: 1, y: 0, duration: 0.45, ease: 'back.out(2.2)' }, s.t0 + 0.2);
+              tl.to($('#alertMonitor'), { x: '+=10', duration: 0.04, repeat: 8, yoyo: true, ease: 'power1.inOut' }, s.t0 + 0.65);
+              tl.to($('#fakeButton'), { scale: 1.08, transformOrigin: 'center', duration: 0.3, repeat: 12, yoyo: true, ease: 'sine.inOut' }, s.t0 + 0.7);
+              tl.to($('#urgentCountdown text'), { fill: '#fff', duration: 0.2, repeat: 16, yoyo: true }, s.t0 + 0.7);
+            }
+          },
+          {
+            id: 'forensic', t0: 10.0, t1: 15.0,
+            speaker: 'Carlos',
+            dialogue: 'Carlos duda y analiza el remitente: la dirección dice pagos guión online punto net.',
+            label: 'EL ENGAÑO OCULTO', title: 'El remitente suplanta dominio', highlight: 'dominio',
+            bg: '#0f1a30',
+            sfx: 'click',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="#0f1a30"/>
+              <g id="forensicBrowser" transform="translate(540 820)">
+                <rect x="-460" y="-90" width="920" height="180" rx="32" fill="${F2.white}" stroke="#3b82f6" stroke-width="6"/>
+                <circle cx="-400" cy="0" r="20" fill="${F2.red}"/>
+                <rect x="-340" y="-55" width="650" height="110" rx="18" fill="#ffe2e5"/>
+                <text x="-310" y="12" font-family="'Nunito', Arial, sans-serif" font-weight="900" font-size="34" fill="#1e293b">
+                  rrhh-pagos-online<tspan id="fakeNetTag" fill="${F2.red}" font-size="38" font-weight="900">.net</tspan>
+                </text>
+              </g>
+
+              <!-- Mechanical Magnifying Glass -->
+              <g id="lensGroup" transform="translate(540 820)">
+                <line x1="120" y1="60" x2="220" y2="160" stroke="#64748b" stroke-width="28" stroke-linecap="round"/>
+                <circle cx="90" cy="30" r="110" fill="none" stroke="${F2.yellow}" stroke-width="16"/>
+                <circle cx="90" cy="30" r="100" fill="rgba(255,200,61,0.15)"/>
+                <line id="scanBeam" x1="0" y1="30" x2="180" y2="30" stroke="#00f2fe" stroke-width="6" opacity="0.8"/>
+              </g>
+
+              <!-- Descending Malicious Fishing Hook -->
+              <g id="baitHook" transform="translate(540 1280)">
+                <line x1="0" y1="-380" x2="0" y2="20" stroke="${F2.red}" stroke-width="12" stroke-dasharray="16 12"/>
+                <path d="M0 20 C0 140, -110 140, -110 50 C-110 10, -85 10, -85 50 C-85 105, -24 105, -24 20 Z" fill="${F2.red}"/>
+                <polygon points="-110,50 -130,70 -95,75" fill="${F2.red}"/>
+                <g id="credentialTarget" transform="translate(0 150)">
+                  <rect x="-90" y="-30" width="180" height="60" rx="12" fill="${F2.yellow}"/>
+                  <text x="0" y="8" font-family="'JetBrains Mono', monospace" font-weight="800" font-size="20" fill="#14213d" text-anchor="middle">CONTRASEÑA</text>
+                </g>
+              </g>
+            `),
+            anim(tl, s, $) {
+              tl.fromTo($('#forensicBrowser'), { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: 'power3.out' }, s.t0 + 0.1);
+              tl.fromTo($('#lensGroup'), { x: 300, y: 720, scale: 0.5 }, { x: 500, y: 810, scale: 1.15, duration: 0.85, ease: 'back.out(1.8)' }, s.t0 + 0.25);
+              tl.fromTo($('#scanBeam'), { y: -50 }, { y: 50, duration: 0.8, repeat: 4, yoyo: true, ease: 'power1.inOut' }, s.t0 + 0.4);
+              tl.to($('#fakeNetTag'), { scale: 1.25, transformOrigin: 'center', duration: 0.25, repeat: 14, yoyo: true }, s.t0 + 0.5);
+              tl.fromTo($('#baitHook'), { y: 1000, rotation: -20 }, { y: 1280, rotation: 10, duration: 0.9, ease: 'elastic.out(1, 0.4)' }, s.t0 + 0.4);
+              tl.to($('#baitHook'), { rotation: -10, transformOrigin: '0px -380px', duration: 1.0, repeat: 3, yoyo: true, ease: 'sine.inOut' }, s.t0 + 1.3);
+            }
+          },
+          {
+            id: 'action', t0: 15.0, t1: 20.0,
+            speaker: 'Carlos & Sofía',
+            dialogue: 'Cero clics. Carlos presiona reportar y el enlace fraudulento queda bloqueado al instante.',
+            label: 'PROTOCOLO ACTIVO', title: 'Reporta directo a seguridad', highlight: 'seguridad',
+            bg: '#111e38',
+            sfx: 'alert',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="#111e38"/>
+              
+              <!-- Split Command Layout -->
+              <g id="tacticalResponse" transform="translate(540 960)">
+                <!-- Carlos Side (Left) -->
+                <g id="sideCarlos" transform="translate(-240 0)">
+                  <rect x="-200" y="-240" width="400" height="480" rx="32" fill="#1e2c4a" stroke="#334155" stroke-width="6"/>
+                  <circle cx="0" cy="-80" r="60" fill="#f8c8a0"/>
+                  <rect x="-70" y="-10" width="140" height="150" rx="30" fill="${F2.blue}"/>
+                  <g id="reportBtnGroup" transform="translate(0 140)">
+                    <rect id="reportBtn" x="-150" y="-30" width="300" height="65" rx="18" fill="${F2.red}"/>
+                    <text x="0" y="10" font-family="'Nunito', Arial, sans-serif" font-weight="900" font-size="24" fill="#fff" text-anchor="middle">✓ REPORTAR PHISHING</text>
+                  </g>
+                </g>
+
+                <!-- Conduit Pulse Beam -->
+                <g id="signalConduit" transform="translate(-40 140)">
+                  <line x1="-30" y1="0" x2="110" y2="0" stroke="#334155" stroke-width="14" stroke-linecap="round"/>
+                  <line id="laserPulse" x1="-30" y1="0" x2="110" y2="0" stroke="#00f2fe" stroke-width="10" stroke-linecap="round"/>
+                </g>
+
+                <!-- Sofia & SOC Firewall (Right) -->
+                <g id="sideSofia" transform="translate(240 0)">
+                  <rect x="-200" y="-240" width="400" height="480" rx="32" fill="#162540" stroke="${F2.blue}" stroke-width="8"/>
+                  <circle cx="0" cy="-80" r="60" fill="#f2c29b"/>
+                  <path d="M-60 -90 Q0 -130 60 -90 Q40 -60 0 -60 Q-40 -60 -60 -90 Z" fill="#8b5a2b"/>
+                  <rect x="-70" y="-10" width="140" height="150" rx="30" fill="${F2.blueD}"/>
+                  
+                  <!-- Heavy Firewall Shield Barrier -->
+                  <g id="firewallGate" transform="translate(0 140)">
+                    <rect x="-160" y="-35" width="320" height="70" rx="20" fill="${F2.green}"/>
+                    <text x="0" y="10" font-family="'Nunito', Arial, sans-serif" font-weight="900" font-size="24" fill="#091322" text-anchor="middle">🛡️ AMENAZA BLOQUEADA</text>
+                  </g>
+                </g>
+              </g>
+            `),
+            anim(tl, s, $) {
+              tl.fromTo($('#sideCarlos'), { x: -340, opacity: 0 }, { x: -240, opacity: 1, duration: 0.5, ease: 'back.out(1.8)' }, s.t0 + 0.1);
+              tl.fromTo($('#sideSofia'), { x: 340, opacity: 0 }, { x: 240, opacity: 1, duration: 0.5, ease: 'back.out(1.8)' }, s.t0 + 0.2);
+              tl.to($('#reportBtn'), { scaleX: 1.15, scaleY: 0.75, transformOrigin: 'center', duration: 0.1, yoyo: true, repeat: 1, ease: 'power2.inOut' }, s.t0 + 0.6);
+              tl.fromTo($('#laserPulse'), { strokeDasharray: 140, strokeDashoffset: 140 }, { strokeDashoffset: 0, duration: 0.35, ease: 'power2.in' }, s.t0 + 0.7);
+              tl.fromTo($('#firewallGate'), { scale: 0.4, y: 80, opacity: 0 }, { scale: 1, y: 140, opacity: 1, duration: 0.45, ease: 'bounce.out' }, s.t0 + 0.95);
+            }
+          },
+          {
+            id: 'golden_rule', t0: 20.0, t1: 25.0,
+            speaker: 'Conciencia SOC',
+            dialogue: 'La urgencia artificial es la trampa. Verifica siempre antes de confiar.',
+            label: 'REGLA DE ORO', title: 'Tu cautela salva la empresa', highlight: 'empresa',
+            stat: { value: '0 CLICS', text: 'Verifica siempre antes de confiar' },
+            bg: F2.night,
+            sfx: 'success',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="${F2.night}"/>
+              
+              <!-- Expanding Concentric Shockwaves -->
+              <g transform="translate(540 960)">
+                <circle id="shockRing1" cx="0" cy="0" r="280" fill="none" stroke="${F2.green}" stroke-width="8" opacity="0.8"/>
+                <circle id="shockRing2" cx="0" cy="0" r="380" fill="none" stroke="${F2.sky}" stroke-width="6" opacity="0.6"/>
+              </g>
+
+              <!-- Central Golden Resilience Shield -->
+              <g id="shieldGold" transform="translate(540 960)">
+                <path d="M0 -240 L210 -150 C210 70, 0 270, 0 270 C0 270, -210 70, -210 -150 Z" fill="${F2.blue}" stroke="#00f2fe" stroke-width="12"/>
+                <path d="M0 -200 L170 -125 C170 50, 0 225, 0 225 C0 225, -170 50, -170 -125 Z" fill="${F2.blueD}"/>
+                <path id="goldCheck" d="M-70 10 L-10 75 L95 -45" fill="none" stroke="${F2.green}" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
+                
+                <g id="zeroBadge" transform="translate(0 340)">
+                  <rect x="-180" y="-35" width="360" height="70" rx="35" fill="${F2.yellow}"/>
+                  <text x="0" y="12" font-family="'JetBrains Mono', monospace" font-weight="900" font-size="28" fill="#14213d" text-anchor="middle">0 CLICS // VERIFICADO</text>
+                </g>
+              </g>
+            `),
+            anim(tl, s, $) {
+              tl.fromTo($('#shieldGold'), { scale: 0, rotation: -20 }, { scale: 1, rotation: 0, duration: 0.65, ease: 'back.out(2.2)' }, s.t0 + 0.1);
+              tl.fromTo($('#goldCheck'), { strokeDasharray: 300, strokeDashoffset: 300 }, { strokeDashoffset: 0, duration: 0.6, ease: 'power2.out' }, s.t0 + 0.45);
+              tl.fromTo($('#shockRing1, #shockRing2'), { scale: 0.5, opacity: 1 }, { scale: 1.8, opacity: 0, duration: 1.4, repeat: 2, stagger: 0.4, ease: 'power2.out' }, s.t0 + 0.3);
+              tl.fromTo($('#zeroBadge'), { scale: 1.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: 'elastic.out(1, 0.4)' }, s.t0 + 0.7);
+            }
+          }
+        ]
+      },
+
+      badusb: {
+        id: 'badusb-alert',
+        name: 'Amenaza BadUSB',
+        duration: 25.0,
+        scenes: [
+          {
+            id: 'find', t0: 0.0, t1: 5.0,
+            speaker: 'Carlos',
+            dialogue: 'En el pasillo corporativo brilla una memoria USB metálica abandonada en el suelo.',
+            label: 'CEBO FÍSICO', title: 'Memoria tirada en recepción', highlight: 'recepción',
+            bg: '#14213d', sfx: 'click',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="#14213d"/>
+              
+              <!-- Hallway Perspective Corridor -->
+              <g id="hallwayBg" transform="translate(140 680)">
+                <rect x="0" y="0" width="800" height="480" rx="24" fill="#1b2a4c"/>
+                <polygon points="0,480 220,320 580,320 800,480" fill="#0f192e"/>
+                <line x1="220" y1="320" x2="0" y2="480" stroke="#334155" stroke-width="8"/>
+                <line x1="580" y1="320" x2="800" y2="480" stroke="#334155" stroke-width="8"/>
+                <rect x="360" y="300" width="80" height="30" rx="6" fill="#00f2fe" opacity="0.6"/>
+              </g>
+
+              <!-- Metallic USB on Floor with Rotating Star Flare -->
+              <g id="floorUsb" transform="translate(540 1200)">
+                <ellipse cx="0" cy="50" rx="160" ry="28" fill="#000" opacity="0.45"/>
+                <rect x="-60" y="-90" width="120" height="160" rx="24" fill="${F2.sky}" stroke="#fff" stroke-width="6"/>
+                <rect x="-35" y="-140" width="70" height="50" rx="8" fill="#e2e8f0"/>
+                <rect x="-20" y="-130" width="16" height="20" rx="3" fill="#334155"/>
+                <rect x="4" y="-130" width="16" height="20" rx="3" fill="#334155"/>
+                <!-- Star Flare -->
+                <g id="starFlare" transform="translate(50 -70)">
+                  <polygon points="0,-30 8,-8 30,0 8,8 0,30 -8,8 -30,0 -8,-8" fill="${F2.yellow}"/>
+                </g>
+              </g>
+            `),
+            anim(tl, s, $) {
+              f2Pop(tl, $('#hallwayBg'), s.t0 + 0.1, 0.6);
+              tl.fromTo($('#floorUsb'), { scale: 0.5, y: 1050 }, { scale: 1, y: 1200, duration: 0.6, ease: 'back.out(2)' }, s.t0 + 0.3);
+              tl.to($('#starFlare'), { rotation: 360, transformOrigin: 'center', duration: 2.2, repeat: -1, ease: 'none' }, s.t0 + 0.4);
+              tl.to($('#starFlare'), { scale: 1.4, duration: 0.6, repeat: 5, yoyo: true }, s.t0 + 0.4);
+            }
+          },
+          {
+            id: 'temptation', t0: 5.0, t1: 10.0,
+            speaker: 'Carlos',
+            dialogue: 'Tiene una etiqueta tentadora: bonos ejecutivos confidenciales del año.',
+            label: 'LA TENTACIÓN', title: 'Salarios y bonos confidenciales', highlight: 'confidenciales',
+            bg: '#181e35', sfx: 'alert',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="#181e35"/>
+              <g id="usbCloseUp" transform="translate(540 980)">
+                <rect x="-160" y="-180" width="320" height="420" rx="44" fill="${F2.blueD}" stroke="#fff" stroke-width="8"/>
+                <rect x="-90" y="-300" width="180" height="120" rx="16" fill="#cbd5e1"/>
+                <rect x="-55" y="-270" width="40" height="50" rx="6" fill="${F2.yellow}"/>
+                <rect x="15" y="-270" width="40" height="50" rx="6" fill="${F2.yellow}"/>
+                <g id="labelTag" transform="translate(0 40)">
+                  <rect x="-140" y="-70" width="280" height="140" rx="14" fill="#fff9db" stroke="${F2.red}" stroke-width="4"/>
+                  <text x="0" y="-20" font-family="'Nunito', Arial, sans-serif" font-weight="900" font-size="30" fill="${F2.red}" text-anchor="middle">BONOS 2026</text>
+                  <text x="0" y="24" font-family="'Nunito', Arial, sans-serif" font-weight="800" font-size="22" fill="#1e293b" text-anchor="middle">CONFIDENCIAL</text>
+                </g>
+              </g>
+              <!-- Heartbeat EKG Pulse below -->
+              <g id="ekgHeartbeat" transform="translate(540 1420)">
+                <path id="ekgLine" d="M-400 0 L-120 0 L-80 -40 L-40 50 L0 -80 L40 60 L80 -20 L120 0 L400 0" stroke="${F2.red}" stroke-width="8" fill="none"/>
+              </g>
+            `),
+            anim(tl, s, $) {
+              tl.fromTo($('#usbCloseUp'), { scale: 0.6, y: 1100 }, { scale: 1, y: 980, duration: 0.55, ease: 'back.out(2)' }, s.t0 + 0.1);
+              tl.to($('#labelTag'), { scale: 1.08, transformOrigin: 'center', duration: 0.35, repeat: 10, yoyo: true }, s.t0 + 0.4);
+              tl.fromTo($('#ekgLine'), { strokeDasharray: 900, strokeDashoffset: 900 }, { strokeDashoffset: 0, duration: 1.8, repeat: 1, ease: 'power1.inOut' }, s.t0 + 0.3);
+            }
+          },
+          {
+            id: 'danger', t0: 10.0, t1: 15.0,
+            speaker: 'Alerta SOC',
+            dialogue: '¡Cuidado! No es un disco: es un microcontrolador que inyecta comandos como teclado.',
+            label: 'ATAQUE OCULTO', title: 'Inyecta comandos como teclado', highlight: 'teclado',
+            bg: '#1c1022', sfx: 'sparks',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="#1c1022"/>
+              <!-- X-Ray Microcontroller -->
+              <g id="microcontroller" transform="translate(540 980)">
+                <rect x="-180" y="-200" width="360" height="400" rx="36" fill="#0f172a" stroke="${F2.red}" stroke-width="10"/>
+                <!-- PCB traces -->
+                <path d="M-120 -140 L-60 -140 L-60 -60" stroke="#00f2fe" stroke-width="8" fill="none"/>
+                <path d="M120 -140 L60 -140 L60 -60" stroke="#00f2fe" stroke-width="8" fill="none"/>
+                <rect x="-80" y="-50" width="160" height="140" rx="16" fill="${F2.red}"/>
+                <circle cx="0" cy="20" r="30" fill="${F2.yellow}"/>
+                <text x="0" y="28" font-family="'JetBrains Mono', monospace" font-weight="900" font-size="24" fill="#000" text-anchor="middle">⚡ HID</text>
+                
+                <!-- Lightning command keystrokes -->
+                <g id="keystrokes">
+                  <path d="M-140 180 L-60 260 L-30 220 L30 300" stroke="${F2.yellow}" stroke-width="8" fill="none"/>
+                  <path d="M140 180 L60 260 L30 220 L-30 300" stroke="${F2.yellow}" stroke-width="8" fill="none"/>
+                </g>
+              </g>
+            `),
+            anim(tl, s, $) {
+              tl.fromTo($('#microcontroller'), { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(2)' }, s.t0 + 0.1);
+              tl.to($('#microcontroller'), { x: '+=12', duration: 0.05, repeat: 16, yoyo: true }, s.t0 + 0.3);
+              tl.fromTo($('#keystrokes path'), { opacity: 0 }, { opacity: 1, duration: 0.1, repeat: 20, yoyo: true }, s.t0 + 0.3);
+            }
+          },
+          {
+            id: 'contain', t0: 15.0, t1: 20.0,
+            speaker: 'Carlos',
+            dialogue: 'Carlos no la conecta. La guarda en una bolsa antiestática de seguridad para el SOC.',
+            label: 'PROCEDIMIENTO SOC', title: 'Guarda en bolsa segura', highlight: 'segura',
+            bg: '#111f38', sfx: 'click',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="#111f38"/>
+              <g id="faradayBag" transform="translate(540 1020)">
+                <rect x="-260" y="-200" width="520" height="420" rx="32" fill="#334155" stroke="#94a3b8" stroke-width="10"/>
+                <rect x="-260" y="-200" width="520" height="50" rx="16" fill="${F2.yellow}"/>
+                <text x="0" y="-168" font-family="'Nunito', Arial, sans-serif" font-weight="900" font-size="24" fill="#0f172a" text-anchor="middle">BOLSA DE CUARENTENA SOC</text>
+                <circle cx="0" cy="40" r="70" fill="${F2.blueD}"/>
+                <path d="M-30 40 L-10 60 L35 20" stroke="#00f2fe" stroke-width="14" fill="none" stroke-linecap="round"/>
+              </g>
+            `),
+            anim(tl, s, $) {
+              tl.fromTo($('#faradayBag'), { scale: 0.5, y: 1200 }, { scale: 1, y: 1020, duration: 0.5, ease: 'back.out(2)' }, s.t0 + 0.1);
+              tl.fromTo($('#faradayBag path'), { strokeDasharray: 120, strokeDashoffset: 120 }, { strokeDashoffset: 0, duration: 0.5, ease: 'power2.out' }, s.t0 + 0.45);
+            }
+          },
+          {
+            id: 'quarantine', t0: 20.0, t1: 25.0,
+            speaker: 'Sofía',
+            dialogue: 'Los cebos físicos explotan tu curiosidad. Jamás conectes dispositivos desconocidos.',
+            label: 'REGLA OPERATIVA', title: 'Cero conexión de memorias ajenas', highlight: 'ajenas',
+            stat: { value: '0 CONEXIÓN', text: 'Entrega a cuarentena siempre' },
+            bg: F2.night, sfx: 'success',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="${F2.night}"/>
+              <g id="forensicVault" transform="translate(540 960)">
+                <circle cx="0" cy="0" r="260" fill="${F2.blueD}" stroke="#00f2fe" stroke-width="16"/>
+                <circle cx="0" cy="0" r="200" fill="#0f172a"/>
+                <path d="M-60 0 L60 0 M0 -60 L0 60" stroke="${F2.yellow}" stroke-width="16" stroke-linecap="round"/>
+                <circle cx="160" cy="-140" r="50" fill="${F2.green}"/>
+                <path d="M140 -140 L155 -125 L180 -155" stroke="#fff" stroke-width="12" fill="none"/>
+              </g>
+            `),
+            anim(tl, s, $) {
+              tl.fromTo($('#forensicVault'), { scale: 0, rotation: -45 }, { scale: 1, rotation: 0, duration: 0.65, ease: 'back.out(2)' }, s.t0 + 0.1);
+            }
+          }
+        ]
+      },
+
+      ransomware: {
+        id: 'ransomware-alert',
+        name: 'Bloqueo Ransomware',
+        duration: 25.0,
+        scenes: [
+          {
+            id: 'freeze', t0: 0.0, t1: 5.0,
+            speaker: 'Carlos',
+            dialogue: 'De pronto, el cursor se detiene y las carpetas de trabajo se convierten en candados.',
+            label: 'SISTEMA AFECTADO', title: 'La pantalla se congela', highlight: 'congela',
+            bg: '#1c2538', sfx: 'click',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="#1c2538"/>
+              <g id="workstationFreeze" transform="translate(540 980)">
+                <rect x="-420" y="-280" width="840" height="520" rx="36" fill="#0f172a" stroke="#1e293b" stroke-width="8"/>
+                <circle id="freezeSpinner" cx="0" cy="0" r="60" fill="none" stroke="${F2.sky}" stroke-width="14" stroke-dasharray="80 40"/>
+                <g transform="translate(-200 -80)">
+                  <rect x="-40" y="-30" width="80" height="60" rx="8" fill="${F2.yellow}"/>
+                </g>
+                <g transform="translate(200 -80)">
+                  <rect x="-40" y="-30" width="80" height="60" rx="8" fill="${F2.yellow}"/>
+                </g>
+              </g>
+            `),
+            anim(tl, s, $) {
+              f2Pop(tl, $('#workstationFreeze'), s.t0 + 0.1, 0.6);
+              tl.to($('#freezeSpinner'), { rotation: 720, transformOrigin: 'center', duration: 4.5, ease: 'none' }, s.t0 + 0.2);
+            }
+          },
+          {
+            id: 'blackmail', t0: 5.0, t1: 10.0,
+            speaker: 'Pantalla',
+            dialogue: 'La pantalla se tiñe de rojo: tus archivos están cifrados, paga el rescate.',
+            label: 'EXTORSIÓN EN CURSO', title: 'Todos tus archivos cifrados', highlight: 'cifrados',
+            bg: '#240c1c', sfx: 'lock',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="#240c1c"/>
+              <g id="crimsonMonitor" transform="translate(540 980)">
+                <rect x="-440" y="-280" width="880" height="540" rx="36" fill="#15050f" stroke="${F2.red}" stroke-width="10"/>
+                <rect x="-410" y="-250" width="820" height="480" rx="22" fill="${F2.red}"/>
+                <g id="giantPadlock" transform="translate(0 30)">
+                  <rect x="-110" y="-20" width="220" height="160" rx="28" fill="${F2.yellow}"/>
+                  <path d="M-60 -20 L-60 -90 C-60 -150 60 -150 60 -90 L60 -20" stroke="${F2.yellow}" stroke-width="28" fill="none"/>
+                  <circle cx="0" cy="50" r="22" fill="#14213d"/>
+                </g>
+              </g>
+            `),
+            anim(tl, s, $) {
+              tl.fromTo($('#crimsonMonitor'), { scale: 0.65, y: 120 }, { scale: 1, y: 0, duration: 0.5, ease: 'back.out(2)' }, s.t0 + 0.1);
+              tl.to($('#crimsonMonitor'), { x: '+=10', duration: 0.05, repeat: 10, yoyo: true }, s.t0 + 0.35);
+            }
+          },
+          {
+            id: 'unplug', t0: 10.0, t1: 15.0,
+            speaker: 'Carlos',
+            dialogue: '¡Mantén la calma! Desconecta el cable de red y apaga el Wi-Fi de inmediato.',
+            label: 'CORTE DE RED', title: 'Desconecta cable y Wi-Fi', highlight: 'cable',
+            bg: '#14213d', sfx: 'click',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="#14213d"/>
+              <g id="ethernetYank" transform="translate(540 980)">
+                <rect x="140" y="-120" width="140" height="240" rx="24" fill="#334155"/>
+                <path id="ethCable" d="M-420 0 L-20 0" stroke="${F2.sky}" stroke-width="42" stroke-linecap="round"/>
+                <g id="sparkBurst" transform="translate(60 0)">
+                  <line x1="0" y1="-40" x2="0" y2="40" stroke="${F2.yellow}" stroke-width="8"/>
+                  <line x1="-40" y1="0" x2="40" y2="0" stroke="${F2.yellow}" stroke-width="8"/>
+                </g>
+              </g>
+            `),
+            anim(tl, s, $) {
+              f2Pop(tl, $('#ethernetYank'), s.t0 + 0.1, 0.5);
+              tl.to($('#ethCable'), { x: -140, duration: 0.25, ease: 'power3.in' }, s.t0 + 0.6);
+              tl.fromTo($('#sparkBurst'), { scale: 0 }, { scale: 1.5, duration: 0.2, yoyo: true, repeat: 1 }, s.t0 + 0.85);
+            }
+          },
+          {
+            id: 'soc_call', t0: 15.0, t1: 20.0,
+            speaker: 'Sofía',
+            dialogue: 'El equipo de seguridad aísla la estación y activa los respaldos fuera de línea.',
+            label: 'SOPORTE CRÍTICO', title: 'Notifica de inmediato al SOC', highlight: 'SOC',
+            bg: '#0f1c34', sfx: 'alert',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="#0f1c34"/>
+              <g id="socCommandWall" transform="translate(540 960)">
+                <rect x="-440" y="-240" width="880" height="480" rx="30" fill="#152442" stroke="#00f2fe" stroke-width="6"/>
+                <circle cx="0" cy="-30" r="80" fill="${F2.blueD}"/>
+                <rect x="-180" y="120" width="360" height="65" rx="20" fill="${F2.green}"/>
+                <text x="0" y="162" font-family="'Nunito', Arial, sans-serif" font-weight="900" font-size="24" fill="#091322" text-anchor="middle">✓ AISLAMIENTO EXITOSO</text>
+              </g>
+            `),
+            anim(tl, s, $) {
+              tl.fromTo($('#socCommandWall'), { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }, s.t0 + 0.1);
+            }
+          },
+          {
+            id: 'restore', t0: 20.0, t1: 25.0,
+            speaker: 'Conciencia SOC',
+            dialogue: 'Cero pagos a criminales. La resiliencia y las copias seguras salvan la operación.',
+            label: 'RESILIENCIA PROBADA', title: 'Cero pagos a criminales', highlight: 'criminales',
+            stat: { value: '100% DATOS', text: 'Copias aisladas salvan la operación' },
+            bg: '#0c1b33', sfx: 'success',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="#0c1b33"/>
+              <g id="cloudRecoveryVault" transform="translate(540 940)">
+                <circle cx="-100" cy="-120" r="75" fill="${F2.sky}"/>
+                <circle cx="0" cy="-170" r="105" fill="${F2.sky}"/>
+                <circle cx="100" cy="-120" r="75" fill="${F2.sky}"/>
+                <rect x="-140" y="-80" width="280" height="120" fill="${F2.sky}"/>
+                <rect x="-180" y="80" width="360" height="140" rx="24" fill="${F2.green}"/>
+                <path d="M-40 150 L-10 180 L50 120" stroke="#fff" stroke-width="16" fill="none" stroke-linecap="round"/>
+              </g>
+            `),
+            anim(tl, s, $) {
+              tl.fromTo($('#cloudRecoveryVault'), { scale: 0, rotation: -15 }, { scale: 1, rotation: 0, duration: 0.6, ease: 'back.out(2)' }, s.t0 + 0.1);
+            }
+          }
+        ]
+      },
+
+      'ai-safety': {
+        id: 'ai-safety-alert',
+        name: 'Seguridad en IA',
+        duration: 25.0,
+        scenes: [
+          {
+            id: 'shortcut', t0: 0.0, t1: 5.0,
+            speaker: 'Carlos',
+            dialogue: 'Tienes que resumir un contrato confidencial o depurar código fuente a contrarreloj.',
+            label: 'PRODUCTIVIDAD CON RIESGO', title: 'Revisar contratos en IA pública', highlight: 'pública',
+            bg: '#14213d', sfx: 'click',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="#14213d"/>
+              <g id="workspaceAi" transform="translate(540 980)">
+                <rect x="-420" y="160" width="840" height="35" rx="10" fill="#8b5a2b"/>
+                <rect x="-380" y="-180" width="360" height="280" rx="20" fill="#0f172a" stroke="#334155" stroke-width="6"/>
+                <rect x="20" y="-180" width="360" height="280" rx="20" fill="#0f172a" stroke="#00f2fe" stroke-width="6"/>
+                <!-- Glowing AI Orb -->
+                <circle id="aiOrb" cx="200" cy="-40" r="50" fill="${F2.purple}"/>
+              </g>
+            `),
+            anim(tl, s, $) {
+              f2Pop(tl, $('#workspaceAi'), s.t0 + 0.1, 0.6);
+              tl.to($('#aiOrb'), { scale: 1.25, transformOrigin: 'center', duration: 0.8, repeat: -1, yoyo: true }, s.t0 + 0.3);
+            }
+          },
+          {
+            id: 'public_leak', t0: 5.0, t1: 10.0,
+            speaker: 'Alerta SOC',
+            dialogue: 'La tentación es pegarlo en una inteligencia artificial pública gratuita sin protección.',
+            label: 'FUGA DE DATOS', title: 'Tus secretos entrenan al modelo', highlight: 'entrenan',
+            bg: '#161d36', sfx: 'alert',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="#161d36"/>
+              <g id="giantNeuralBrain" transform="translate(540 960)">
+                <circle cx="0" cy="0" r="140" fill="${F2.purple}" stroke="#ff0055" stroke-width="12"/>
+                <circle cx="-160" cy="-100" r="50" fill="${F2.blue}"/>
+                <circle cx="160" cy="-100" r="50" fill="${F2.blue}"/>
+                <!-- Leaking Data Tokens -->
+                <g id="tokenStream">
+                  <rect x="-40" y="-20" width="80" height="40" rx="8" fill="${F2.yellow}"/>
+                </g>
+              </g>
+            `),
+            anim(tl, s, $) {
+              tl.fromTo($('#giantNeuralBrain'), { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }, s.t0 + 0.1);
+              tl.to($('#tokenStream'), { y: 220, opacity: 0, duration: 0.6, repeat: 7, ease: 'power2.in' }, s.t0 + 0.4);
+            }
+          },
+          {
+            id: 'competitor', t0: 10.0, t1: 15.0,
+            speaker: 'Competencia',
+            dialogue: 'Esa información entrena al modelo público y tus secretos quedan expuestos a terceros.',
+            label: 'RIESGO COMPETITIVO', title: 'Claves y patentes al descubierto', highlight: 'descubierto',
+            bg: '#1c152a', sfx: 'alert',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="#1c152a"/>
+              <g id="competitorScreen" transform="translate(540 960)">
+                <rect x="-420" y="-260" width="840" height="520" rx="36" fill="#0c0714" stroke="${F2.red}" stroke-width="8"/>
+                <text x="0" y="-120" font-family="'Nunito', Arial, sans-serif" font-weight="900" font-size="36" fill="${F2.red}" text-anchor="middle">⚠ FILTRACIÓN DETECTADA</text>
+                <circle cx="0" cy="40" r="80" fill="none" stroke="${F2.red}" stroke-width="12"/>
+                <line x1="-50" y1="-10" x2="50" y2="90" stroke="${F2.red}" stroke-width="12"/>
+              </g>
+            `),
+            anim(tl, s, $) {
+              f2Pop(tl, $('#competitorScreen'), s.t0 + 0.1, 0.6);
+            }
+          },
+          {
+            id: 'enclave', t0: 15.0, t1: 20.0,
+            speaker: 'Sofía',
+            dialogue: 'Usa únicamente las herramientas de inteligencia artificial aprobadas en enclaves privados.',
+            label: 'CANAL APROBADO', title: 'Usa el entorno privado', highlight: 'privado',
+            bg: '#0f1f3a', sfx: 'click',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="#0f1f3a"/>
+              <g id="enclaveDome" transform="translate(540 960)">
+                <circle cx="0" cy="0" r="260" fill="#0b172b" stroke="${F2.green}" stroke-width="16"/>
+                <circle cx="0" cy="0" r="120" fill="${F2.blueD}"/>
+                <rect x="-180" y="165" width="360" height="70" rx="35" fill="${F2.green}"/>
+                <text x="0" y="210" font-family="'Nunito', Arial, sans-serif" font-weight="900" font-size="24" fill="#091322" text-anchor="middle">✓ ENTORNO CORPORATIVO</text>
+              </g>
+            `),
+            anim(tl, s, $) {
+              tl.fromTo($('#enclaveDome'), { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }, s.t0 + 0.1);
+            }
+          },
+          {
+            id: 'intellectual_property', t0: 20.0, t1: 25.0,
+            speaker: 'Conciencia SOC',
+            dialogue: 'Acelera tu trabajo e innova con seguridad sin comprometer la propiedad intelectual.',
+            label: 'INNOVACIÓN SEGURA', title: 'Innova sin arriesgar propiedad', highlight: 'propiedad',
+            stat: { value: '100% AISLADO', text: 'Sin entrenamiento externo' },
+            bg: F2.night, sfx: 'success',
+            html: () => svgWrap(`
+              <rect x="0" y="0" width="1080" height="1920" fill="${F2.night}"/>
+              <g id="ipVault" transform="translate(540 960)">
+                <path d="M0 -240 L210 -150 C210 70, 0 270, 0 270 C0 270, -210 70, -210 -150 Z" fill="${F2.blue}" stroke="#00f2fe" stroke-width="12"/>
+                <path id="ipCheck" d="M-70 10 L-10 75 L95 -45" fill="none" stroke="${F2.green}" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            `),
+            anim(tl, s, $) {
+              tl.fromTo($('#ipVault'), { scale: 0, rotation: -20 }, { scale: 1, rotation: 0, duration: 0.65, ease: 'back.out(2)' }, s.t0 + 0.1);
+              tl.fromTo($('#ipCheck'), { strokeDasharray: 300, strokeDashoffset: 300 }, { strokeDashoffset: 0, duration: 0.6, ease: 'power2.out' }, s.t0 + 0.45);
+            }
+          }
+        ]
+      }
+    };
+
+    /* =====================================================================
+       PLAYER STATE & GSAP CONTROLLER
+       ===================================================================== */
+    let currentTopicKey = 'phishing';
+    let currentMasterTl = null;
+    let isPlaying = false;
+    let playbackSpeed = 1.0;
+    let lastActiveSceneIdx = -1;
+
+    // DOM Elements
+    const scenesContainer = document.getElementById('scenesContainer');
+    const scrubber = document.getElementById('timelineScrubber');
+    const timeDisplay = document.getElementById('timeDisplay');
+    const btnPlayPause = document.getElementById('btnPlayPause');
+    const btnRestart = document.getElementById('btnRestart');
+    const btnStepFwd = document.getElementById('btnStepFwd');
+    const btnVoiceToggle = document.getElementById('btnVoiceToggle');
+    const btnMusicToggle = document.getElementById('btnMusicToggle');
+    const btnSfxToggle = document.getElementById('btnSfxToggle');
+    const speedSelect = document.getElementById('speedSelect');
+    const toggleSafeGuideBtn = document.getElementById('toggleSafeGuideBtn');
+    const safeGuideOverlay = document.getElementById('safeGuideOverlay');
+    const storyboardStrip = document.getElementById('storyboardStrip');
+    const currentTopicBadge = document.getElementById('currentTopicBadge');
+    const btnViewStoryboardImg = document.getElementById('btnViewStoryboardImg');
+    const cliVoiceCmd = document.getElementById('cliVoiceCmd');
+    const cliScenesCmd = document.getElementById('cliScenesCmd');
+    const cliStoryboardCmd = document.getElementById('cliStoryboardCmd');
+    const scriptViewer = document.getElementById('scriptViewer');
+
+    function loadVideo(topicKey) {
+      currentTopicKey = topicKey;
+      const video = VIDEOS[topicKey];
+      if (!video) return;
+
+      currentTopicBadge.innerText = video.id.toUpperCase() + ' (25s)';
+      btnViewStoryboardImg.href = `videos/${video.id}/storyboard.png`;
+      cliVoiceCmd.innerText = `node core/voice.ts videos/${video.id}`;
+      cliScenesCmd.innerText = `node core/scenes.ts videos/${video.id}`;
+      cliStoryboardCmd.innerText = `node core/storyboard.ts videos/${video.id}`;
+
+      if (currentMasterTl) {
+        currentMasterTl.kill();
+        currentMasterTl = null;
+      }
+      voiceAudio.pause();
+      voiceAudio.src = `videos/${video.id}/audio.wav?t=${Date.now()}`;
+      voiceAudio.currentTime = 0;
+      voiceAudio.load();
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+
+      scenesContainer.innerHTML = '';
+      storyboardStrip.innerHTML = '';
+      scriptViewer.innerHTML = '';
+      lastActiveSceneIdx = -1;
+
+      // Populate Script Lines Box
+      video.scenes.forEach((s, idx) => {
+        const lineEl = document.createElement('div');
+        lineEl.className = 'script-line-item' + (idx === 0 ? ' active' : '');
+        lineEl.id = `scriptLine_${idx}`;
+        lineEl.innerHTML = `
+          <div class="script-speaker-tag">[${s.speaker}]:</div>
+          <div class="script-dialogue-text">"${s.dialogue}"</div>
+        `;
+        lineEl.addEventListener('click', () => {
+          seekTo(s.t0 + 0.05);
+        });
+        scriptViewer.appendChild(lineEl);
+      });
+
+      // Master GSAP Timeline (25.0s)
+      currentMasterTl = gsap.timeline({
+        paused: true,
+        onUpdate: onTimelineUpdate,
+        onComplete: () => {
+          isPlaying = false;
+          btnPlayPause.innerText = '▶';
+          btnPlayPause.classList.remove('active');
+          voiceAudio.pause();
+          stopAmbientMusic();
+          setDucking(false);
+          // Auto Loop after 1 second
+          setTimeout(() => {
+            if (currentMasterTl) {
+              seekTo(0);
+              playVideo();
+            }
+          }, 1000);
+        }
+      });
+
+      // Build Scenes
+      video.scenes.forEach((s, idx) => {
+        const sec = document.createElement('section');
+        sec.id = s.id;
+        sec.className = 'f2-clip';
+        sec.style.background = s.bg || F2.night;
+
+        const artDiv = document.createElement('div');
+        artDiv.className = 'f2-art';
+        artDiv.innerHTML = s.html();
+        sec.appendChild(artDiv);
+
+        const titlesDiv = document.createElement('div');
+        titlesDiv.className = 'f2-titles';
+
+        if (s.label) {
+          const lbl = document.createElement('div');
+          lbl.className = 'f2-label';
+          lbl.innerText = s.label.toUpperCase();
+          titlesDiv.appendChild(lbl);
+        }
+
+        if (s.title) {
+          const titleDiv = document.createElement('div');
+          titleDiv.className = 'f2-title' + (s.title.length > 28 ? ' long' : '');
+          const words = s.title.split(' ');
+          words.forEach(w => {
+            const sp = document.createElement('span');
+            const isHl = s.highlight && w.toLowerCase().includes(s.highlight.toLowerCase());
+            sp.className = 'f2-word' + (isHl ? ' hl' : '');
+            if (isHl) {
+              const box = document.createElement('span');
+              box.className = 'box';
+              sp.appendChild(box);
+            }
+            sp.appendChild(document.createTextNode(w));
+            titleDiv.appendChild(sp);
+          });
+          titlesDiv.appendChild(titleDiv);
+        }
+
+        if (s.stat) {
+          const card = document.createElement('div');
+          card.className = 'f2-card';
+          card.innerHTML = `<div class="value">${s.stat.value}</div><div class="text">${s.stat.text}</div>`;
+          titlesDiv.appendChild(card);
+        }
+
+        sec.appendChild(titlesDiv);
+        scenesContainer.appendChild(sec);
+
+        const $ = (sel) => `#${s.id} ${sel}`;
+
+        // Timeline Clip Control
+        currentMasterTl.set(sec, { display: 'block' }, s.t0);
+        if (idx < video.scenes.length - 1) {
+          currentMasterTl.set(sec, { display: 'none' }, s.t1);
+        }
+
+        // Titles Animations
+        if (s.label) {
+          currentMasterTl.fromTo($('.f2-label'), { scale: 0.4, opacity: 0, xPercent: -50 }, { scale: 1, opacity: 1, xPercent: -50, duration: 0.35, ease: 'back.out(2.2)' }, s.t0 + 0.05);
+        }
+
+        if (s.title) {
+          const wordCount = s.title.split(' ').length;
+          currentMasterTl.fromTo($('.f2-word'), { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'power3.out', stagger: 0.45 / wordCount }, s.t0 + 0.1);
+
+          if (s.highlight) {
+            const tHl = s.t0 + 0.55;
+            currentMasterTl.fromTo($('.box'), { scaleX: 0 }, {
+              scaleX: 1,
+              duration: 0.3,
+              ease: 'power2.out',
+              onStart: () => playSfx('click')
+            }, tHl);
+            currentMasterTl.fromTo($('.f2-word.hl'), { color: 'var(--f2-ink)' }, { color: 'var(--f2-accent-text)', duration: 0.12 }, tHl + 0.16);
+          }
+        }
+
+        if (s.stat) {
+          currentMasterTl.fromTo($('.f2-card'), { y: 80, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.8)' }, s.t0 + 0.7);
+        }
+
+        // Scene custom art animations
+        if (s.anim) {
+          s.anim(currentMasterTl, s, $);
+        }
+
+        // Storyboard Strip Item (5 Panels)
+        const stepCard = document.createElement('div');
+        stepCard.className = 'scene-step-card' + (idx === 0 ? ' active' : '');
+        stepCard.innerHTML = `
+          <div class="scene-meta">
+            <span class="scene-num">P0${idx + 1}</span>
+            <span class="scene-time">${s.t0.toFixed(0)}s-${s.t1.toFixed(0)}s</span>
+          </div>
+          <div class="scene-title-text" style="font-size:0.75rem;">${s.title}</div>
+          ${s.stat ? `<div class="scene-stat-badge">${s.stat.value}</div>` : ''}
+        `;
+        stepCard.addEventListener('click', () => {
+          seekTo(s.t0 + 0.05);
+        });
+        storyboardStrip.appendChild(stepCard);
+      });
+
+      currentMasterTl.set({}, {}, video.duration);
+      currentMasterTl.timeScale(playbackSpeed);
+
+      scrubber.max = video.duration;
+      seekTo(0);
+      playVideo();
+    }
+
+    function playVideo() {
+      if (!currentMasterTl) return;
+      getAudioContext();
+      currentMasterTl.play();
+      isPlaying = true;
+      btnPlayPause.innerText = '⏸';
+      btnPlayPause.classList.add('active');
+
+      if (musicEnabled) {
+        startAmbientMusic();
+      }
+
+      if (voiceEnabled) {
+        if (voiceAudio.src) {
+          voiceAudio.currentTime = currentMasterTl.time();
+          voiceAudio.playbackRate = playbackSpeed;
+          voiceAudio.play().catch(e => {
+            console.log('Voice audio direct play prevented or waiting:', e);
+          });
+        }
+      }
+    }
+
+    function pauseVideo() {
+      if (!currentMasterTl) return;
+      currentMasterTl.pause();
+      isPlaying = false;
+      btnPlayPause.innerText = '▶';
+      btnPlayPause.classList.remove('active');
+      if (voiceAudio) {
+        voiceAudio.pause();
+      }
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.pause();
+      }
+      setDucking(false);
+    }
+
+    function seekTo(time) {
+      if (!currentMasterTl) return;
+      currentMasterTl.time(time);
+      if (voiceAudio && voiceAudio.readyState >= 1) {
+        voiceAudio.currentTime = time;
+      }
+      onTimelineUpdate();
+    }
+
+    function onTimelineUpdate() {
+      if (!currentMasterTl) return;
+      const t = currentMasterTl.time();
+      const dur = currentMasterTl.duration() || 25.0;
+      scrubber.value = t;
+      timeDisplay.innerText = `${t.toFixed(1).padStart(4, '0')}s / ${dur.toFixed(1).padStart(4, '0')}s`;
+
+      const video = VIDEOS[currentTopicKey];
+      if (!video) return;
+
+      const currentIdx = video.scenes.findIndex(s => t >= s.t0 && t < s.t1);
+      if (currentIdx !== -1 && currentIdx !== lastActiveSceneIdx) {
+        lastActiveSceneIdx = currentIdx;
+
+        // Highlight active storyboard panel
+        document.querySelectorAll('.scene-step-card').forEach((card, idx) => {
+          card.classList.toggle('active', idx === currentIdx);
+        });
+
+        // Highlight active script line
+        document.querySelectorAll('.script-line-item').forEach((item, idx) => {
+          item.classList.toggle('active', idx === currentIdx);
+        });
+
+        const curScene = video.scenes[currentIdx];
+        // If Voicebox audio is paused or error, trigger fallback utterance
+        if (isPlaying && voiceEnabled && (voiceAudio.paused || !voiceAudio.src)) {
+          speakSpanishFallback(curScene.dialogue);
+        }
+        if (isPlaying && curScene.sfx) {
+          playSfx(curScene.sfx);
+        }
+      }
+    }
+
+    // UI Event Listeners
+    btnPlayPause.addEventListener('click', () => {
+      if (isPlaying) pauseVideo();
+      else playVideo();
+    });
+
+    btnRestart.addEventListener('click', () => {
+      seekTo(0);
+      playVideo();
+    });
+
+    btnStepFwd.addEventListener('click', () => {
+      if (!currentMasterTl) return;
+      seekTo(Math.min(currentMasterTl.duration(), currentMasterTl.time() + 2.0));
+    });
+
+    scrubber.addEventListener('input', (e) => {
+      pauseVideo();
+      seekTo(parseFloat(e.target.value));
+    });
+
+    speedSelect.addEventListener('change', (e) => {
+      playbackSpeed = parseFloat(e.target.value);
+      if (currentMasterTl) currentMasterTl.timeScale(playbackSpeed);
+      if (voiceAudio) voiceAudio.playbackRate = playbackSpeed;
+    });
+
+    btnVoiceToggle.addEventListener('click', () => {
+      voiceEnabled = !voiceEnabled;
+      btnVoiceToggle.classList.toggle('voice-active', voiceEnabled);
+      if (!voiceEnabled) {
+        voiceAudio.pause();
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        setDucking(false);
+      } else if (isPlaying) {
+        voiceAudio.currentTime = currentMasterTl.time();
+        voiceAudio.playbackRate = playbackSpeed;
+        voiceAudio.play().catch(() => {});
+      }
+    });
+
+    btnMusicToggle.addEventListener('click', () => {
+      musicEnabled = !musicEnabled;
+      btnMusicToggle.classList.toggle('active', musicEnabled);
+      if (musicEnabled && isPlaying) {
+        startAmbientMusic();
+      } else {
+        stopAmbientMusic();
+      }
+    });
+
+    btnSfxToggle.addEventListener('click', () => {
+      sfxEnabled = !sfxEnabled;
+      btnSfxToggle.classList.toggle('active', sfxEnabled);
+    });
+
+    toggleSafeGuideBtn.addEventListener('click', () => {
+      safeGuideOverlay.classList.toggle('visible');
+      toggleSafeGuideBtn.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.topic-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.topic-card').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        const topic = card.dataset.topic;
+        loadVideo(topic);
+      });
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadVideo('phishing');
+    });
+  </script>
+</body>
+</html>

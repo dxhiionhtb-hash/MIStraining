@@ -1,0 +1,323 @@
+/**
+ * ESTACIÓN 1: VISOR FORENSE DE MENSAJERÍA TÁCTICA
+ * HUD Táctico Moderno: Fondos carbón, bordes 1px, chamfered clips, escáner X-Ray reactivo
+ */
+
+.m1-layout {
+  display: grid;
+  grid-template-columns: 310px 1fr;
+  gap: var(--space-4);
+  min-height: 520px;
+}
+
+/* Bandeja Lateral de Mensajes */
+.m1-inbox-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  background: var(--bg-surface-card);
+  border: 1px solid var(--border-subtle);
+  clip-path: var(--chamfer-md);
+  padding: var(--space-3);
+}
+
+.m1-sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.m1-message-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  list-style: none;
+}
+
+.m1-message-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-3);
+  background: var(--bg-deep);
+  border: 1px solid var(--border-subtle);
+  clip-path: var(--chamfer-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
+  width: 100%;
+}
+
+.m1-message-item:hover {
+  background: var(--bg-surface-elevated);
+  border-color: var(--border-cyan);
+}
+
+.m1-message-item.active {
+  background: var(--bg-surface-elevated);
+  border-color: var(--accent-cyan);
+  box-shadow: inset 2px 0 0 var(--accent-cyan);
+}
+
+.m1-message-item.resolved {
+  border-left: 3px solid var(--accent-cyan);
+}
+
+.m1-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-xs);
+}
+
+.m1-sender-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--accent-cyan);
+  background: var(--accent-cyan-dim);
+  padding: 1px 5px;
+  clip-path: var(--chamfer-sm);
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.m1-item-subject {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.m1-item-snippet {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Panel Principal de Lectura */
+.m1-viewer-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.m1-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) var(--space-4);
+  background: var(--bg-surface-card);
+  border: 1px solid var(--border-subtle);
+  clip-path: var(--chamfer-sm);
+}
+
+/* Botón Rayos X */
+.btn-xray-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px 14px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-cyan);
+  clip-path: var(--chamfer-sm);
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-xray-toggle:hover {
+  background: var(--accent-cyan-dim);
+}
+
+.btn-xray-toggle.active {
+  background: var(--accent-cyan);
+  color: var(--bg-deep);
+  box-shadow: 0 0 14px var(--accent-cyan-glow);
+}
+
+/* Contenido del Correo */
+.m1-email-card {
+  background: var(--bg-surface-card);
+  border: 1px solid var(--border-subtle);
+  clip-path: var(--chamfer-md);
+  padding: var(--space-5);
+  position: relative;
+  overflow: hidden;
+}
+
+.m1-email-card.xray-active {
+  border-color: var(--accent-cyan);
+}
+
+.m1-email-card.xray-active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+  animation: xrayScanline 2.5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes xrayScanline {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(500px); }
+}
+
+.m1-email-headers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: var(--text-xs);
+}
+
+.m1-header-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.m1-header-label {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  width: 55px;
+  font-size: 0.7rem;
+}
+
+.m1-header-value {
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.m1-email-body {
+  padding: var(--space-4) 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.m1-email-body p {
+  margin-bottom: var(--space-3);
+}
+
+/* Zonas Marcadas con Rayos X */
+.xray-target {
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  padding: 1px 4px;
+  border-radius: var(--radius-sm);
+}
+
+.xray-active .xray-target {
+  background: rgba(255, 70, 85, 0.18);
+  border: 1px dashed var(--accent-red);
+  color: #ff949d;
+  animation: beaconPing 2s infinite;
+}
+
+.xray-active .xray-target:hover {
+  background: rgba(255, 70, 85, 0.35);
+  border-color: #ffffff;
+}
+
+/* Ficha Forense Desplegada */
+.m1-forensic-card {
+  display: none;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-deep);
+  border: 1px solid var(--border-cyan);
+  clip-path: var(--chamfer-sm);
+  margin-top: var(--space-3);
+  animation: fadeInTactical 160ms var(--ease-out) forwards;
+}
+
+.m1-forensic-card.visible {
+  display: flex;
+}
+
+.m1-forensic-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  letter-spacing: 0.05em;
+}
+
+.m1-forensic-body {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Botones de Acción Forense */
+.m1-actions-bar {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.btn-tactical {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 40px;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  clip-path: var(--chamfer-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-tactical-danger {
+  background: var(--accent-red-dim);
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+}
+
+.btn-tactical-danger:hover {
+  background: var(--accent-red);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(255, 70, 85, 0.4);
+}
+
+.btn-tactical-primary {
+  background: var(--accent-cyan-dim);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+.btn-tactical-primary:hover {
+  background: var(--accent-cyan);
+  color: var(--bg-deep);
+  box-shadow: 0 0 16px var(--accent-cyan-glow);
+}

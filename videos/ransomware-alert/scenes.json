@@ -1,0 +1,98 @@
+{
+ "style": "flat2d",
+ "fps": 30,
+ "format": "9:16",
+ "duration": 25,
+ "notes": "Flat 2D 25-second cinematic awareness short on Ransomware. Frozen desktop, crimson extortion padlock, emergency cable unplugging, SOC incident response, immutable cloud backup restore.",
+ "scenes": [
+  {
+   "id": "freeze",
+   "type": "process",
+   "label": "SISTEMA AFECTADO",
+   "title": "La pantalla se congela",
+   "highlight": "congela",
+   "visual": "corporate desktop files turning into little padlocks with spinning cursor and worried Carlos",
+   "keys": [
+    {
+     "id": "cursor",
+     "t": 1.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 0,
+   "t1": 5
+  },
+  {
+   "id": "blackmail",
+   "type": "question",
+   "label": "EXTORSIÓN EN CURSO",
+   "title": "Todos tus archivos cifrados",
+   "highlight": "cifrados",
+   "visual": "crimson screen with digital skull and giant falling steel padlock locking down",
+   "keys": [
+    {
+     "id": "lock",
+     "t": 6.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 5,
+   "t1": 10
+  },
+  {
+   "id": "unplug",
+   "type": "process",
+   "label": "CORTE DE RED",
+   "title": "Desconecta cable y Wi-Fi",
+   "highlight": "cable",
+   "visual": "decisive hand yanking ethernet RJ45 cable cutting lateral propagation sparks",
+   "keys": [
+    {
+     "id": "unplug",
+     "t": 11.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 10,
+   "t1": 15
+  },
+  {
+   "id": "soc_call",
+   "type": "process",
+   "label": "SOPORTE CRÍTICO",
+   "title": "Notifica de inmediato al SOC",
+   "highlight": "SOC",
+   "visual": "Sofia at SOC operations center activating segment network isolation lever and radio telemetry",
+   "keys": [
+    {
+     "id": "soc",
+     "t": 16.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 15,
+   "t1": 20
+  },
+  {
+   "id": "restore",
+   "type": "stat",
+   "label": "RESILIENCIA PROBADA",
+   "title": "Cero pagos a criminales",
+   "highlight": "criminales",
+   "visual": "immutable cloud vault descending clean green data streams, dissolving the padlock",
+   "stat": {
+    "value": "100% DATOS",
+    "text": "Copias aisladas salvan la operación"
+   },
+   "keys": [
+    {
+     "id": "stat",
+     "t": 21.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 20,
+   "t1": 25
+  }
+ ]
+}

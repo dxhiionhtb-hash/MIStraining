@@ -1,0 +1,521 @@
+/**
+ * MODO INSTRUCTOR & ANIMACIONES COMPLEJAS - CYBERSHIELD 2026
+ * Diseñado según Emil Kowalski (animate), frontend-design y herramientas de presentación grupal
+ */
+
+/* ==========================================================================
+   1. Barra de Herramientas Flotante del Instructor (Presenter Dock)
+   ========================================================================== */
+.instructor-dock {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: rgba(12, 16, 23, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-tactical);
+  border-radius: var(--radius-full);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(34, 197, 94, 0.15);
+  transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.25s ease;
+}
+
+.instructor-dock.minimized {
+  transform: translateX(-50%) translateY(75px);
+  opacity: 0.85;
+}
+
+.instructor-dock-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: var(--radius-full);
+  color: var(--accent-green);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.instructor-dock-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: 0 0 8px var(--accent-green);
+  animation: presenterPulse 1.6s infinite;
+}
+
+@keyframes presenterPulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+.instructor-btn-tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.instructor-btn-tool:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: var(--border-tactical);
+  transform: translateY(-1px);
+}
+
+.instructor-btn-tool.active {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.3);
+}
+
+.instructor-btn-tool.active-laser {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
+}
+
+.instructor-btn-tool.active-spotlight {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+}
+
+.instructor-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--border-tactical);
+  margin: 0 2px;
+}
+
+/* ==========================================================================
+   2. Puntero Láser Táctico & Foco Escénico (Spotlight Mask)
+   ========================================================================== */
+.tactical-laser-pointer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ff2442;
+  box-shadow: 0 0 10px #ff2442, 0 0 20px #ff2442, 0 0 35px #ff4655;
+  pointer-events: none;
+  z-index: 100000;
+  transform: translate(-50%, -50%);
+  display: none;
+  transition: width 0.1s, height 0.1s;
+}
+
+.tactical-laser-pointer::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 28px;
+  border: 1px dashed rgba(255, 70, 85, 0.6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: laserAura 1.2s linear infinite;
+}
+
+@keyframes laserAura {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(0.9); opacity: 0.8; }
+  50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.15); opacity: 0.4; }
+  100% { transform: translate(-50%, -50%) rotate(360deg) scale(0.9); opacity: 0.8; }
+}
+
+/* Máscara de Foco Escénico (Spotlight Mask) */
+.tactical-spotlight-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  display: none;
+  background: radial-gradient(circle 180px at var(--mouse-x, 50vw) var(--mouse-y, 50vh), transparent 0%, rgba(5, 8, 13, 0.85) 100%);
+  transition: opacity 0.2s ease;
+}
+
+.tactical-spotlight-overlay.active {
+  display: block;
+}
+
+/* ==========================================================================
+   3. Modal / Panel de Votación Rápida de la Sala (Audience Live Poll)
+   ========================================================================== */
+.audience-poll-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: 90%;
+  max-width: 580px;
+  background: var(--bg-surface);
+  border: 1px solid var(--accent-cyan);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  z-index: 10001;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 189, 248, 0.2);
+  display: none;
+  opacity: 0;
+  transition: all 0.22s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.audience-poll-modal.open {
+  display: block;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.poll-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.poll-title-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.poll-title {
+  font-size: var(--text-base);
+  font-weight: 800;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.poll-question-text {
+  font-size: var(--text-sm);
+  color: #cbd5e1;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.poll-vote-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.poll-vote-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 14px;
+  background: var(--bg-input);
+  border: 2px solid var(--border-tactical);
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.16s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.poll-vote-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-cyan);
+}
+
+.poll-vote-btn.option-phish:hover, .poll-vote-btn.option-phish.voted {
+  border-color: var(--accent-red);
+  background: rgba(239, 68, 68, 0.12);
+}
+
+.poll-vote-btn.option-safe:hover, .poll-vote-btn.option-safe.voted {
+  border-color: var(--accent-green);
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.poll-vote-count {
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-top: 6px;
+}
+
+.poll-results-bar-wrap {
+  margin-bottom: 18px;
+}
+
+.poll-results-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.poll-track {
+  width: 100%;
+  height: 12px;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  display: flex;
+}
+
+.poll-fill-safe {
+  background: var(--accent-green);
+  height: 100%;
+  width: 50%;
+  transition: width 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.poll-fill-danger {
+  background: var(--accent-red);
+  height: 100%;
+  width: 50%;
+  transition: width 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.poll-verdict-banner {
+  padding: 12px 16px;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid var(--accent-green);
+  border-radius: var(--radius-sm);
+  color: #ffffff;
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  display: none;
+  animation: thmFadeIn 0.3s ease-out;
+}
+
+.poll-actions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+/* Backdrop */
+.audience-poll-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: none;
+}
+
+.audience-poll-backdrop.open {
+  display: block;
+}
+
+/* ==========================================================================
+   4. Modo Proyector / Escenario Expandido (Projector Cinema Mode)
+   ========================================================================== */
+body.cinema-stage-active .thm-sidebar-column {
+  display: none;
+}
+
+body.cinema-stage-active .thm-room-grid {
+  grid-template-columns: 1fr;
+}
+
+body.cinema-stage-active .motion-stage-canvas {
+  height: 380px !important;
+  transition: height 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+body.cinema-stage-active .motion-stage-canvas svg {
+  max-width: 980px;
+}
+
+/* ==========================================================================
+   5. KEYFRAMES COMPLEJOS Y FÍSICOS (NO SOLO MOVIMIENTO LATERAL)
+   ========================================================================== */
+
+/* A. Phishing: Péndulo con amortiguación inercial y caída libre del anzuelo */
+@keyframes hookDropBounce {
+  0% { transform: translateY(-70px) scaleY(0.7); opacity: 0; }
+  55% { transform: translateY(12px) scaleY(1.1); opacity: 1; }
+  75% { transform: translateY(-6px) scaleY(0.95); }
+  90% { transform: translateY(3px) scaleY(1.02); }
+  100% { transform: translateY(0) scaleY(1); opacity: 1; }
+}
+
+@keyframes pendulumSwing {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(6.5deg); }
+  75% { transform: rotate(-6.5deg); }
+}
+
+@keyframes magneticJitter {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-1.5px, 1px); }
+  40% { transform: translate(1px, -1.5px); }
+  60% { transform: translate(-1px, -1px); }
+  80% { transform: translate(1.5px, 0.5px); }
+}
+
+/* B. Prisma: Giro 3D volumétrico y división de haz con emisión de chispas */
+@keyframes crystalSpin3D {
+  0% { transform: perspective(600px) rotateY(0deg); }
+  50% { transform: perspective(600px) rotateY(180deg) scale(1.04); }
+  100% { transform: perspective(600px) rotateY(360deg); }
+}
+
+@keyframes laserDeceitPulse {
+  0%, 100% { stroke: #ef4444; filter: drop-shadow(0 0 3px #ef4444); }
+  50% { stroke: #ff7882; filter: drop-shadow(0 0 10px #ff2442); }
+}
+
+@keyframes sparkScatter {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  50% { transform: translate(var(--dx, 20px), var(--dy, -25px)) scale(0.8); opacity: 0.9; }
+  100% { transform: translate(var(--dx2, 35px), var(--dy2, -10px)) scale(0.1); opacity: 0; }
+}
+
+/* C. Búnker: Pistones hidráulicos que cierran de golpe y liberan vapor */
+@keyframes hydraulicSnapLeft {
+  0% { transform: translateX(-40px); }
+  70% { transform: translateX(6px); }
+  85% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes hydraulicSnapRight {
+  0% { transform: translateX(40px); }
+  70% { transform: translateX(-6px); }
+  85% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes steamJets {
+  0% { transform: scale(0.2) translateY(0); opacity: 0.9; }
+  50% { transform: scale(1.4) translateY(-14px); opacity: 0.6; }
+  100% { transform: scale(2.2) translateY(-28px); opacity: 0; }
+}
+
+@keyframes impactShockwave {
+  0% { r: 6; opacity: 1; stroke-width: 4; }
+  100% { r: 52; opacity: 0; stroke-width: 1; }
+}
+
+/* D. Inteligencia Artificial: Perforación espiral y escudo en panal hexagonal */
+@keyframes spiralDrill3D {
+  0% { transform: rotate(0deg) scale(1); filter: drop-shadow(0 0 4px #f59e0b); }
+  50% { transform: rotate(180deg) scale(1.12); filter: drop-shadow(0 0 12px #ef4444); }
+  100% { transform: rotate(360deg) scale(1); filter: drop-shadow(0 0 4px #f59e0b); }
+}
+
+@keyframes neuralCorePulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 6px #38bdf8); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 20px #38bdf8); }
+}
+
+@keyframes hexShieldPulse {
+  0%, 100% { opacity: 0.5; stroke: #22c55e; }
+  50% { opacity: 1; stroke: #86efac; filter: drop-shadow(0 0 8px #22c55e); }
+}
+
+/* E. USB: Descarga de teclado a 1000 WPM y cápsula de congelamiento */
+@keyframes matrixKeystrokes {
+  0% { stroke-dashoffset: 160; opacity: 0.2; }
+  50% { stroke-dashoffset: 80; opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0.2; }
+}
+
+@keyframes teslaArc {
+  0%, 100% { opacity: 0.2; transform: scaleY(1); }
+  25% { opacity: 0.9; transform: scaleY(1.15) skewX(2deg); }
+  50% { opacity: 0.4; transform: scaleY(0.9) skewX(-2deg); }
+  75% { opacity: 1; transform: scaleY(1.2); }
+}
+
+@keyframes cryoDomeDrop {
+  0% { transform: translateY(-90px); opacity: 0; }
+  65% { transform: translateY(8px); opacity: 1; }
+  85% { transform: translateY(-3px); }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* F. Ransomware: Zarcillos de corrupción y corte tajante con guillotina electromagnética */
+@keyframes rootInfection {
+  0% { stroke-dashoffset: 240; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes bladeChop {
+  0% { transform: translateY(-50px); opacity: 0; }
+  60% { transform: translateY(10px); opacity: 1; }
+  80% { transform: translateY(-4px); }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes emeraldCleansingWave {
+  0% { transform: scale(0.1); opacity: 1; }
+  70% { transform: scale(1.6); opacity: 0.5; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+@keyframes needleRev {
+  0% { transform: rotate(-45deg); }
+  40% { transform: rotate(72deg); }
+  60% { transform: rotate(58deg); }
+  80% { transform: rotate(68deg); }
+  100% { transform: rotate(65deg); }
+}
+
+/* Clases de utilidad para SVG */
+.anim-hook-swing { transform-origin: 0 -35px; animation: pendulumSwing 2.8s ease-in-out infinite; }
+.anim-hook-drop { animation: hookDropBounce 1s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+.anim-jitter { animation: magneticJitter 0.3s ease-in-out infinite; }
+.anim-crystal { animation: crystalSpin3D 6s linear infinite; }
+.anim-laser-deceit { animation: laserDeceitPulse 1.4s ease-in-out infinite; }
+.anim-piston-left { animation: hydraulicSnapLeft 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+.anim-piston-right { animation: hydraulicSnapRight 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+.anim-steam { animation: steamJets 1.4s ease-out infinite; }
+.anim-shockwave { animation: impactShockwave 1.6s ease-out infinite; }
+.anim-neural-pulse { animation: neuralCorePulse 2s ease-in-out infinite; }
+.anim-drill { transform-origin: center; animation: spiralDrill3D 1s linear infinite; }
+.anim-hex-shield { animation: hexShieldPulse 2.2s ease-in-out infinite; }
+.anim-matrix-keys { stroke-dasharray: 40; animation: matrixKeystrokes 1.2s linear infinite; }
+.anim-tesla-arc { animation: teslaArc 0.4s ease-in-out infinite; }
+.anim-cryo-drop { animation: cryoDomeDrop 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+.anim-root-infection { stroke-dasharray: 240; animation: rootInfection 3s cubic-bezier(0.77, 0, 0.175, 1) infinite alternate; }
+.anim-blade-chop { animation: bladeChop 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+.anim-cleansing-wave { transform-origin: center; animation: emeraldCleansingWave 2.4s ease-out infinite; }
+.anim-needle-rev { transform-origin: 0 0; animation: needleRev 1.8s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+
+/* Accesibilidad y Preferencias de Movimiento Reducido */
+@media (prefers-reduced-motion: reduce) {
+  .anim-hook-swing, .anim-crystal, .anim-drill, .anim-tesla-arc, .poll-fill-safe, .poll-fill-danger {
+    animation: none !important;
+  }
+}

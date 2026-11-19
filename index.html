@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0c1017">
+  <meta name="description" content="CyberShield: Sala de Concientización Corporativa en Seguridad de la Información.">
+  <title>CyberShield // TryHackMe Room - Concientización Corporativa</title>
+
+  <!-- Tipografía Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Hojas de Estilo del Sistema de Diseño -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/thm-room.css">
+  <link rel="stylesheet" href="css/instructor.css">
+  <link rel="stylesheet" href="css/gsap-motions.css">
+  <link rel="stylesheet" href="css/stations/overview.css">
+  <link rel="stylesheet" href="css/stations/station-m1.css">
+  <link rel="stylesheet" href="css/stations/station-m2.css">
+  <link rel="stylesheet" href="css/stations/station-m3.css">
+  <link rel="stylesheet" href="css/stations/station-m4.css">
+  <link rel="stylesheet" href="css/stations/diagnosis.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- GSAP Local para Diagramas Vectoriales Vivos -->
+  <script src="assets/vendor/gsap.min.js"></script>
+</head>
+<body>
+  <div class="app-viewport">
+    <!-- Barra Superior de Navegación Estilo TryHackMe -->
+    <header class="thm-navbar" id="thmNavbar"></header>
+
+    <!-- Contenedor Principal de la Sala -->
+    <main class="thm-room-container">
+      <!-- Breadcrumbs de Aprendizaje -->
+      <nav class="thm-breadcrumbs" aria-label="Ruta de navegación">
+        <a href="#">Aprender</a>
+        <span class="separator">/</span>
+        <a href="#">Seguridad Defensiva</a>
+        <span class="separator">/</span>
+        <a href="#">Pre-Security</a>
+        <span class="separator">/</span>
+        <span class="current">CyberShield: Concientización Corporativa</span>
+      </nav>
+
+      <!-- Banner de la Sala (Room Hero Banner) -->
+      <section class="thm-room-hero" id="thmRoomHero"></section>
+
+      <!-- Cuadrícula Principal de 2 Columnas: Tareas a la Izquierda, Máquina a la Derecha -->
+      <div class="thm-room-grid">
+        <!-- Columna Izquierda: Pila de Tareas en Acordeón -->
+        <section class="thm-tasks-stack" id="thmTasksStack">
+          <!-- Tarea 1: Phishing & Manipulación Social -->
+          <article class="thm-task-card open" id="thmTaskCard_task1" data-task-id="task1">
+            <header class="thm-task-header" data-task-toggle="task1">
+              <div class="thm-task-header-left">
+                <span class="thm-task-chevron" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+                <span class="thm-task-badge-num">TAREA 1</span>
+                <h2 class="thm-task-title-text">Phishing & Manipulación Social</h2>
+              </div>
+              <div class="thm-task-status-pill" id="thmTaskStatus_task1">
+                ○ Pendiente
+              </div>
+            </header>
+            <div class="thm-task-body" id="thmTaskBody_task1">
+              <div id="mount_station_m1"></div>
+              <div class="gsap-motion-card" style="margin-top: 24px;">
+                <div class="gsap-motion-header">
+                  <div class="gsap-motion-title">
+                    <span class="gsap-motion-badge">DIAGRAMA VIVO</span>
+                    <span>Refracción Forense de Phishing & Typosquatting</span>
+                  </div>
+                  <div class="gsap-motion-status">
+                    <span class="gsap-pulse-dot"></span>
+                    <span>BUCLE FLUIDO // GSAP</span>
+                  </div>
+                </div>
+                <div id="mount_gsap_task1"></div>
+                <div class="gsap-motion-footer">
+                  <span class="legend">Slug: <code>phishing-prisma</code> // Autoplay con detección de visibilidad</span>
+                  <span class="fps-pill">● 60 FPS GPU</span>
+                </div>
+              </div>
+              <div class="thm-questions-block" id="questions_task1"></div>
+            </div>
+          </article>
+
+          <!-- Tarea 2: Seguridad en IA & Protección de Datos -->
+          <article class="thm-task-card" id="thmTaskCard_task2" data-task-id="task2">
+            <header class="thm-task-header" data-task-toggle="task2">
+              <div class="thm-task-header-left">
+                <span class="thm-task-chevron" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+                <span class="thm-task-badge-num">TAREA 2</span>
+                <h2 class="thm-task-title-text">Seguridad en IA & Protección de Datos</h2>
+              </div>
+              <div class="thm-task-status-pill" id="thmTaskStatus_task2">
+                ○ Pendiente
+              </div>
+            </header>
+            <div class="thm-task-body" id="thmTaskBody_task2">
+              <div id="mount_station_m2"></div>
+              <div class="gsap-motion-card" style="margin-top: 24px;">
+                <div class="gsap-motion-header">
+                  <div class="gsap-motion-title">
+                    <span class="gsap-motion-badge">DIAGRAMA VIVO</span>
+                    <span>Reactor Hexagonal & Bóveda Sanitizadora de IA</span>
+                  </div>
+                  <div class="gsap-motion-status">
+                    <span class="gsap-pulse-dot"></span>
+                    <span>BUCLE FLUIDO // GSAP</span>
+                  </div>
+                </div>
+                <div id="mount_gsap_task2"></div>
+                <div class="gsap-motion-footer">
+                  <span class="legend">Slug: <code>ia-sanitizer</code> // Enmascaramiento de tokens y cero retención</span>
+                  <span class="fps-pill">● 60 FPS GPU</span>
+                </div>
+              </div>
+              <div class="thm-questions-block" id="questions_task2"></div>
+            </div>
+          </article>
+
+          <!-- Tarea 3: Medios Extraíbles (USB) & Amenazas Físicas -->
+          <article class="thm-task-card" id="thmTaskCard_task3" data-task-id="task3">
+            <header class="thm-task-header" data-task-toggle="task3">
+              <div class="thm-task-header-left">
+                <span class="thm-task-chevron" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+                <span class="thm-task-badge-num">TAREA 3</span>
+                <h2 class="thm-task-title-text">Medios Extraíbles (USB) & Amenazas Físicas</h2>
+              </div>
+              <div class="thm-task-status-pill" id="thmTaskStatus_task3">
+                ○ Pendiente
+              </div>
+            </header>
+            <div class="thm-task-body" id="thmTaskBody_task3">
+              <div id="mount_station_m3"></div>
+              <div class="gsap-motion-card" style="margin-top: 24px;">
+                <div class="gsap-motion-header">
+                  <div class="gsap-motion-title">
+                    <span class="gsap-motion-badge">DIAGRAMA VIVO</span>
+                    <span>Cúpula Criogénica & Interrupción de Inyección BadUSB</span>
+                  </div>
+                  <div class="gsap-motion-status">
+                    <span class="gsap-pulse-dot"></span>
+                    <span>BUCLE FLUIDO // GSAP</span>
+                  </div>
+                </div>
+                <div id="mount_gsap_task3"></div>
+                <div class="gsap-motion-footer">
+                  <span class="legend">Slug: <code>usb-cuarentena</code> // Aislamiento físico de periféricos</span>
+                  <span class="fps-pill">● 60 FPS GPU</span>
+                </div>
+              </div>
+              <div class="thm-questions-block" id="questions_task3"></div>
+            </div>
+          </article>
+
+          <!-- Tarea 4: Ransomware & Protocolo de Contención -->
+          <article class="thm-task-card" id="thmTaskCard_task4" data-task-id="task4">
+            <header class="thm-task-header" data-task-toggle="task4">
+              <div class="thm-task-header-left">
+                <span class="thm-task-chevron" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+                <span class="thm-task-badge-num">TAREA 4</span>
+                <h2 class="thm-task-title-text">Ransomware & Protocolo de Contención</h2>
+              </div>
+              <div class="thm-task-status-pill" id="thmTaskStatus_task4">
+                ○ Pendiente
+              </div>
+            </header>
+            <div class="thm-task-body" id="thmTaskBody_task4">
+              <div id="mount_station_m4"></div>
+              <div class="gsap-motion-card" style="margin-top: 24px;">
+                <div class="gsap-motion-header">
+                  <div class="gsap-motion-title">
+                    <span class="gsap-motion-badge">DIAGRAMA VIVO</span>
+                    <span>Guillotina de Red en 60 Segundos & Respaldo Inmutable</span>
+                  </div>
+                  <div class="gsap-motion-status">
+                    <span class="gsap-pulse-dot"></span>
+                    <span>BUCLE FLUIDO // GSAP</span>
+                  </div>
+                </div>
+                <div id="mount_gsap_task4"></div>
+                <div class="gsap-motion-footer">
+                  <span class="legend">Slug: <code>ransomware-corte</code> // Corte de propagación lateral</span>
+                  <span class="fps-pill">● 60 FPS GPU</span>
+                </div>
+              </div>
+              <div class="thm-questions-block" id="questions_task4"></div>
+            </div>
+          </article>
+
+          <!-- Tarea 5: Assess your Power & Certificación Oficial -->
+          <article class="thm-task-card" id="thmTaskCard_task5" data-task-id="task5">
+            <header class="thm-task-header" data-task-toggle="task5">
+              <div class="thm-task-header-left">
+                <span class="thm-task-chevron" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+                <span class="thm-task-badge-num">TAREA 5</span>
+                <h2 class="thm-task-title-text">Assess your Power & Certificación Oficial</h2>
+              </div>
+              <div class="thm-task-status-pill" id="thmTaskStatus_task5">
+                ○ Pendiente
+              </div>
+            </header>
+            <div class="thm-task-body" id="thmTaskBody_task5">
+              <div id="mount_station_m5"></div>
+              <div class="thm-questions-block" id="questions_task5"></div>
+            </div>
+          </article>
+        </section>
+
+        <!-- Columna Derecha: Sidebar TryHackMe -->
+        <aside class="thm-sidebar-column" id="thmSidebarColumn"></aside>
+      </div>
+    </main>
+  </div>
+
+  <!-- Orquestador Principal JavaScript -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

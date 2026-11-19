@@ -1,0 +1,175 @@
+/**
+ * EVALUACIÓN TÁCTICA & CERTIFICADO OFICIAL
+ * HUD Táctico Moderno: Fondos carbón, bordes 1px, chamfered clips, certificado de alta resolución
+ */
+
+.diag-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 1050px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.diag-hero-card {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--space-6);
+  align-items: center;
+  padding: var(--space-5);
+  background: var(--bg-surface-card);
+  border: 1px solid var(--border-subtle);
+  clip-path: var(--chamfer-md);
+  box-shadow: var(--shadow-tactical);
+}
+
+.diag-gauge-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.diag-circle-gauge {
+  width: 150px;
+  height: 150px;
+  transform: rotate(-90deg);
+}
+
+.gauge-bg-circle {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.5);
+  stroke-width: 10;
+}
+
+.gauge-val-circle {
+  fill: none;
+  stroke: var(--accent-cyan);
+  stroke-width: 10;
+  stroke-dasharray: 440;
+  stroke-dashoffset: 88;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s var(--ease-out);
+}
+
+.gauge-center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gauge-number {
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.gauge-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent-cyan);
+  letter-spacing: 0.08em;
+}
+
+.diag-hero-info h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.diag-hero-info p {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* Tarjeta del Certificado Oficial */
+.certificate-frame {
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: var(--radius-sm);
+  padding: var(--space-6);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  position: relative;
+  border: 8px solid #0f172a;
+}
+
+.cert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #0f172a;
+  padding-bottom: var(--space-3);
+}
+
+.cert-logo-text {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
+  color: #0f172a;
+}
+
+.cert-body {
+  text-align: center;
+  padding: var(--space-5) 0;
+}
+
+.cert-title-lead {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #64748b;
+  letter-spacing: 0.12em;
+}
+
+.cert-student-name {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: var(--space-2) 0;
+  text-decoration: underline;
+  text-decoration-color: #00f5d4;
+  text-underline-offset: 6px;
+}
+
+.cert-statement {
+  font-size: 0.85rem;
+  color: #475569;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cert-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid #e2e8f0;
+  padding-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .certificate-frame, .certificate-frame * {
+    visibility: visible;
+  }
+  .certificate-frame {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border: none;
+  }
+}

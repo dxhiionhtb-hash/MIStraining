@@ -1,0 +1,12 @@
+# Dependencies (root and nested styles/flat2d)
+node_modules/
+
+# Redundant unzipped PPTX extraction cache (original .pptx files remain tracked)
+references_docs/extracted/
+
+# Python & environment
+__pycache__/
+*.pyc
+.env
+*.log
+npm-debug.log*

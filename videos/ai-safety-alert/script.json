@@ -1,0 +1,65 @@
+{
+  "language": "es",
+  "title": "Seguridad en IA: Enclave Corporativo",
+  "topic": "ai-safety-alert",
+  "duration": 25.0,
+  "lead": 0.3,
+  "tail": 0.8,
+  "lines": [
+    {
+      "id": "shortcut",
+      "scene": "sc-shortcut",
+      "character": "Carlos",
+      "emotion": "urgencia por cumplir entrega",
+      "text": "Tienes que resumir un contrato confidencial o depurar código fuente a contrarreloj.",
+      "t0": 0.0,
+      "t1": 5.0,
+      "sfx": "keyboard-fast-tap",
+      "pause": 0.2
+    },
+    {
+      "id": "public_leak",
+      "scene": "sc-public-leak",
+      "character": "Voz de Conciencia / Alerta",
+      "emotion": "advertencia severa",
+      "text": "La tentación es pegarlo en una inteligencia artificial pública gratuita sin protección.",
+      "t0": 5.0,
+      "t1": 10.0,
+      "sfx": "data-leak-whoosh",
+      "pause": 0.2
+    },
+    {
+      "id": "competitor",
+      "scene": "sc-competitor",
+      "character": "Competencia / Mercado",
+      "emotion": "riesgo comercial latente",
+      "text": "Esa información entrena al modelo público y tus secretos quedan expuestos a terceros.",
+      "t0": 10.0,
+      "t1": 15.0,
+      "sfx": "market-glitch-drop",
+      "pause": 0.2
+    },
+    {
+      "id": "enclave",
+      "scene": "sc-enclave",
+      "character": "Sofía (SOC)",
+      "emotion": "solución corporativa confiable",
+      "text": "Usa únicamente las herramientas de inteligencia artificial aprobadas en enclaves privados.",
+      "t0": 15.0,
+      "t1": 20.0,
+      "sfx": "vault-lock-pneumatic-chime",
+      "pause": 0.2
+    },
+    {
+      "id": "intellectual_property",
+      "scene": "sc-intellectual-property",
+      "character": "Conciencia SOC",
+      "emotion": "visión de futuro blindada",
+      "text": "Acelera tu trabajo e innova con seguridad sin comprometer la propiedad intelectual.",
+      "t0": 20.0,
+      "t1": 25.0,
+      "sfx": "shield-lock-harmonic",
+      "pause": 0.4
+    }
+  ]
+}

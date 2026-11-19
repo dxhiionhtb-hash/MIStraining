@@ -1,0 +1,221 @@
+/**
+ * ESTACIÓN 2: CONSOLA DE ADUANA IA & SANITIZADOR DLP
+ * HUD Táctico Moderno: Fondos carbón, bordes 1px, chamfered clips, micro-interacciones de tokens
+ */
+
+.m2-layout {
+  display: grid;
+  grid-template-columns: 310px 1fr;
+  gap: var(--space-4);
+  min-height: 520px;
+}
+
+/* Panel Izquierdo: Configuración */
+.m2-config-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background: var(--bg-surface-card);
+  border: 1px solid var(--border-subtle);
+  clip-path: var(--chamfer-md);
+  padding: var(--space-4);
+}
+
+.m2-section-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.m2-env-selector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.m2-env-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--bg-deep);
+  border: 1px solid var(--border-subtle);
+  clip-path: var(--chamfer-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
+}
+
+.m2-env-card:hover {
+  background: var(--bg-surface-elevated);
+  border-color: var(--border-tactical);
+}
+
+.m2-env-card.active {
+  background: var(--bg-surface-elevated);
+  border-color: var(--border-cyan);
+  box-shadow: inset 2px 0 0 var(--accent-cyan);
+}
+
+.m2-env-card.danger.active {
+  border-color: var(--border-red);
+  box-shadow: inset 2px 0 0 var(--accent-red);
+}
+
+.m2-env-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  clip-path: var(--chamfer-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.m2-env-card.active .m2-env-icon {
+  color: var(--accent-cyan);
+  border-color: var(--border-cyan);
+}
+
+.m2-env-card.danger.active .m2-env-icon {
+  color: var(--accent-red);
+  border-color: var(--border-red);
+}
+
+.m2-env-info h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.m2-env-info p {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Categorías Sensibles */
+.m2-categories-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.m2-category-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  background: var(--bg-deep);
+  border: 1px solid var(--border-subtle);
+  clip-path: var(--chamfer-sm);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+.m2-category-item.cleared {
+  border-color: rgba(0, 245, 212, 0.3);
+  color: var(--accent-cyan);
+  background: var(--accent-cyan-dim);
+}
+
+/* Panel Derecho: Stage de Sanitización */
+.m2-stage-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background: var(--bg-surface-card);
+  border: 1px solid var(--border-subtle);
+  clip-path: var(--chamfer-md);
+  padding: var(--space-4);
+}
+
+.m2-risk-hud {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-3);
+  background: var(--bg-deep);
+  border: 1px solid var(--border-subtle);
+  clip-path: var(--chamfer-sm);
+}
+
+.m2-risk-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.m2-risk-pct {
+  font-weight: 800;
+  color: var(--accent-red);
+}
+
+.m2-risk-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+.m2-risk-fill {
+  height: 100%;
+  background: var(--accent-red);
+  transition: width var(--transition-normal), background var(--transition-normal);
+}
+
+.m2-risk-fill.safe {
+  background: var(--accent-cyan);
+}
+
+.m2-prompt-box {
+  padding: var(--space-4);
+  background: var(--bg-deep);
+  border: 1px solid var(--border-tactical);
+  clip-path: var(--chamfer-sm);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+.token-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  clip-path: var(--chamfer-sm);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.token-pill.exposed {
+  background: var(--accent-red-dim);
+  border: 1px solid var(--accent-red);
+  color: #ff949d;
+  animation: beaconPing 2s infinite;
+}
+
+.token-pill.exposed:hover {
+  background: var(--accent-red);
+  color: #ffffff;
+}
+
+.token-pill.masked {
+  background: var(--accent-cyan-dim);
+  border: 1px solid var(--accent-cyan);
+  color: var(--accent-cyan);
+}

@@ -1,0 +1,65 @@
+{
+  "language": "es",
+  "title": "Bloqueo Ransomware: Respuesta Inmediata",
+  "topic": "ransomware-alert",
+  "duration": 25.0,
+  "lead": 0.3,
+  "tail": 0.8,
+  "lines": [
+    {
+      "id": "freeze",
+      "scene": "sc-freeze",
+      "character": "Carlos",
+      "emotion": "confusión y desconcierto",
+      "text": "De pronto, el cursor se detiene y las carpetas de trabajo se convierten en candados.",
+      "t0": 0.0,
+      "t1": 5.0,
+      "sfx": "freeze-glitch-buzz",
+      "pause": 0.2
+    },
+    {
+      "id": "blackmail",
+      "scene": "sc-blackmail",
+      "character": "Nota de Extorsión",
+      "emotion": "amenaza y hostilidad",
+      "text": "La pantalla se tiñe de rojo: tus archivos están cifrados, paga el rescate.",
+      "t0": 5.0,
+      "t1": 10.0,
+      "sfx": "heavy-padlock-clank",
+      "pause": 0.2
+    },
+    {
+      "id": "unplug",
+      "scene": "sc-unplug",
+      "character": "Carlos",
+      "emotion": "decisión y rapidez táctica",
+      "text": "¡Mantén la calma! Desconecta el cable de red y apaga el Wi-Fi de inmediato.",
+      "t0": 10.0,
+      "t1": 15.0,
+      "sfx": "ethernet-snap-spark",
+      "pause": 0.2
+    },
+    {
+      "id": "soc_call",
+      "scene": "sc-soc-call",
+      "character": "Sofía (SOC)",
+      "emotion": "control profesional y serenidad",
+      "text": "El equipo de seguridad aísla la estación y activa los respaldos fuera de línea.",
+      "t0": 15.0,
+      "t1": 20.0,
+      "sfx": "soc-dispatch-chime",
+      "pause": 0.2
+    },
+    {
+      "id": "restore",
+      "scene": "sc-restore",
+      "character": "Conciencia SOC",
+      "emotion": "triunfo y soberanía operativa",
+      "text": "Cero pagos a criminales. La resiliencia y las copias seguras salvan la operación.",
+      "t0": 20.0,
+      "t1": 25.0,
+      "sfx": "restore-complete-harmonic",
+      "pause": 0.4
+    }
+  ]
+}

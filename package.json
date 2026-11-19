@@ -1,0 +1,27 @@
+{
+  "name": "ciber-soc-2026",
+  "version": "1.0.0",
+  "description": "Centro de Operaciones de Ciber-Resiliencia (2026) - Concientización Operativa SPA",
+  "type": "module",
+  "scripts": {
+    "start": "npx serve -l 3000 .",
+    "build": "node scripts/build.mjs",
+    "preview": "npx serve -l 3000 dist",
+    "typecheck": "node core/typecheck.ts",
+    "shorts:preview": "node core/preview.ts",
+    "shorts:check": "node core/scenes.ts"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "typescript": "7.0.2"
+  },
+  "keywords": [
+    "cybersecurity",
+    "ui-ux",
+    "resilience",
+    "antigravity",
+    "spa"
+  ],
+  "author": "MIS Team",
+  "license": "MIT"
+}

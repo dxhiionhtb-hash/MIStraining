@@ -1,0 +1,98 @@
+{
+ "style": "flat2d",
+ "fps": 30,
+ "format": "9:16",
+ "duration": 25,
+ "notes": "Flat 2D 25-second cinematic awareness short on AI Safety. Carlos rushing with confidential contracts, neural model swallowing data, competitor exposure danger, enterprise private AI enclave, intellectual property protection stat card.",
+ "scenes": [
+  {
+   "id": "shortcut",
+   "type": "process",
+   "label": "PRODUCTIVIDAD CON RIESGO",
+   "title": "Revisar contratos en IA pública",
+   "highlight": "pública",
+   "visual": "Carlos at modern dual-monitor workspace copying confidential financial contract data in a rush",
+   "keys": [
+    {
+     "id": "rush",
+     "t": 1.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 0,
+   "t1": 5
+  },
+  {
+   "id": "public_leak",
+   "type": "question",
+   "label": "FUGA DE DATOS",
+   "title": "Tus secretos entrenan al modelo",
+   "highlight": "entrenan",
+   "visual": "confidential document dissolving into bright glowing particles swallowed by a giant public neural net",
+   "keys": [
+    {
+     "id": "leak",
+     "t": 6.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 5,
+   "t1": 10
+  },
+  {
+   "id": "competitor",
+   "type": "process",
+   "label": "RIESGO COMPETITIVO",
+   "title": "Claves y patentes al descubierto",
+   "highlight": "descubierto",
+   "visual": "external neural network radiating sensitive corporate trade secrets to rival competitor screens",
+   "keys": [
+    {
+     "id": "exposed",
+     "t": 11.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 10,
+   "t1": 15
+  },
+  {
+   "id": "enclave",
+   "type": "process",
+   "label": "CANAL APROBADO",
+   "title": "Usa el entorno privado",
+   "highlight": "privado",
+   "visual": "Sofia and Carlos activating enterprise walled AI enclave with green boundary perimeter",
+   "keys": [
+    {
+     "id": "enclave",
+     "t": 16.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 15,
+   "t1": 20
+  },
+  {
+   "id": "intellectual_property",
+   "type": "stat",
+   "label": "INNOVACIÓN SEGURA",
+   "title": "Innova sin arriesgar propiedad",
+   "highlight": "propiedad",
+   "visual": "private corporate AI assistant running at full speed with confidential vault lock and green checkmark",
+   "stat": {
+    "value": "100% AISLADO",
+    "text": "Sin entrenamiento externo"
+   },
+   "keys": [
+    {
+     "id": "stat",
+     "t": 21.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 20,
+   "t1": 25
+  }
+ ]
+}

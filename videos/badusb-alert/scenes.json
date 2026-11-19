@@ -1,0 +1,98 @@
+{
+ "style": "flat2d",
+ "fps": 30,
+ "format": "9:16",
+ "duration": 25,
+ "notes": "Flat 2D 25-second cinematic awareness short on BadUSB. Office hallway, Carlos character, tempting handwritten label, X-ray HID microcontroller injection, anti-static seal, SOC vault lock.",
+ "scenes": [
+  {
+   "id": "find",
+   "type": "process",
+   "label": "CEBO FÍSICO",
+   "title": "Memoria tirada en recepción",
+   "highlight": "recepción",
+   "visual": "hallway corridor with polished floor, Carlos walking and discovering a sleek metallic USB drive",
+   "keys": [
+    {
+     "id": "usb",
+     "t": 1.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 0,
+   "t1": 5
+  },
+  {
+   "id": "temptation",
+   "type": "question",
+   "label": "LA TENTACIÓN",
+   "title": "Salarios y bonos confidenciales",
+   "highlight": "confidenciales",
+   "visual": "close up of the USB drive with tempting handwritten tape label and ominous heart pulse",
+   "keys": [
+    {
+     "id": "label",
+     "t": 6.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 5,
+   "t1": 10
+  },
+  {
+   "id": "danger",
+   "type": "process",
+   "label": "ATAQUE OCULTO",
+   "title": "Inyecta comandos como teclado",
+   "highlight": "teclado",
+   "visual": "X-ray view into USB revealing red microcontroller sparking electrical lightning bolts simulating HID injection",
+   "keys": [
+    {
+     "id": "sparks",
+     "t": 11.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 10,
+   "t1": 15
+  },
+  {
+   "id": "contain",
+   "type": "process",
+   "label": "PROCEDIMIENTO SOC",
+   "title": "Guarda en bolsa segura",
+   "highlight": "segura",
+   "visual": "Carlos avoids plugging it in and seals the device into an anti-static security pouch for SOC delivery",
+   "keys": [
+    {
+     "id": "bag",
+     "t": 16.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 15,
+   "t1": 20
+  },
+  {
+   "id": "quarantine",
+   "type": "stat",
+   "label": "REGLA OPERATIVA",
+   "title": "Cero conexión de memorias ajenas",
+   "highlight": "ajenas",
+   "visual": "SOC analyst Sofia locks the drive in a heavy forensic isolation safe box with green safety confirmation",
+   "stat": {
+    "value": "0 CONEXIÓN",
+    "text": "Entrega a cuarentena siempre"
+   },
+   "keys": [
+    {
+     "id": "stat",
+     "t": 21.5
+    }
+   ],
+   "transition": "cut",
+   "t0": 20,
+   "t1": 25
+  }
+ ]
+}

@@ -1,0 +1,65 @@
+{
+  "language": "es",
+  "title": "Alerta de Phishing: La Falsa Urgencia",
+  "topic": "phishing-alert",
+  "duration": 25.0,
+  "lead": 0.3,
+  "tail": 0.8,
+  "lines": [
+    {
+      "id": "routine",
+      "scene": "sc-routine",
+      "character": "Carlos",
+      "emotion": "alivio y cansancio",
+      "text": "Viernes en la oficina. Carlos termina sus pendientes para salir a descansar.",
+      "t0": 0.0,
+      "t1": 5.0,
+      "sfx": "office-ambient-keyclick",
+      "pause": 0.2
+    },
+    {
+      "id": "urgency",
+      "scene": "sc-urgency",
+      "character": "Atacante / Notificación",
+      "emotion": "alarma y tensión súbita",
+      "text": "Una alerta urgente interrumpe: actualiza tu nómina en quince minutos o pierdes tu pago.",
+      "t0": 5.0,
+      "t1": 10.0,
+      "sfx": "alert-chime-bass-pulse",
+      "pause": 0.2
+    },
+    {
+      "id": "forensic",
+      "scene": "sc-forensic",
+      "character": "Carlos (analizando)",
+      "emotion": "sospecha y agudeza visual",
+      "text": "Carlos duda y analiza el remitente: la dirección dice pagos guión online punto net.",
+      "t0": 10.0,
+      "t1": 15.0,
+      "sfx": "scan-zoom-tension-riser",
+      "pause": 0.2
+    },
+    {
+      "id": "action",
+      "scene": "sc-action",
+      "character": "Carlos & Sofía (SOC)",
+      "emotion": "determinación y control táctico",
+      "text": "Cero clics. Carlos presiona reportar y el enlace fraudulento queda bloqueado al instante.",
+      "t0": 15.0,
+      "t1": 20.0,
+      "sfx": "firm-click-energy-shield",
+      "pause": 0.2
+    },
+    {
+      "id": "golden_rule",
+      "scene": "sc-golden-rule",
+      "character": "Voz de Conciencia Operativa",
+      "emotion": "seguridad, orgullo y tranquilidad",
+      "text": "La urgencia artificial es la trampa. Verifica siempre antes de confiar.",
+      "t0": 20.0,
+      "t1": 25.0,
+      "sfx": "harmonic-success-chime",
+      "pause": 0.4
+    }
+  ]
+}

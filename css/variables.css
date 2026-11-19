@@ -1,0 +1,104 @@
+/**
+ * SISTEMA VISUAL Y TOKENS - TRYHACKME ROOM CLONE & TACTICAL EXPERIENCE
+ * Diseñado según TryHackMe (Security Engineer Intro), frontend-design, Emil Kowalski (animate)
+ */
+
+:root {
+  /* ==========================================================================
+     Paleta Auténtica TryHackMe: Deep Slate Navy + THM Green (#22c55e)
+     ========================================================================== */
+  --bg-deep: #0c1017;               /* THM Canvas Fondo */
+  --bg-dark: #111927;               /* THM Header & Shell */
+  --bg-surface: #1a2332;            /* THM Task Cards */
+  --bg-surface-elevated: #212c40;   /* THM Inner Containers */
+  --bg-surface-card: #151e2e;       /* THM Question Boxes */
+  --bg-input: #0d131f;              /* THM Answer Input */
+  --bg-hover: rgba(34, 197, 94, 0.08);
+  --bg-active: rgba(34, 197, 94, 0.16);
+
+  /* Bordes TryHackMe 1px nítidos */
+  --border-subtle: #243042;
+  --border-tactical: #2a3b50;
+  --border-hover: #3b4f68;
+  --border-focus: #22c55e;
+  --border-cyan: #38bdf8;
+  --border-red: #ef4444;
+  --border-warning: #f59e0b;
+  --border-green: #22c55e;
+
+  /* Colores de Acento TryHackMe */
+  --accent-cyan: #38bdf8;           /* THM Telemetría / Sky */
+  --accent-cyan-dim: rgba(56, 189, 248, 0.14);
+  --accent-cyan-glow: rgba(56, 189, 248, 0.25);
+  
+  --accent-green: #22c55e;          /* TryHackMe Signature Green (Submit / Done) */
+  --accent-green-dim: rgba(34, 197, 94, 0.15);
+  --accent-green-hover: #16a34a;
+  --accent-green-glow: 0 0 16px rgba(34, 197, 94, 0.3);
+
+  --accent-red: #ef4444;            /* TryHackMe Flame / Error */
+  --accent-red-dim: rgba(239, 68, 68, 0.15);
+
+  --accent-warning: #f59e0b;        /* Streak / Star / Points */
+  --accent-purple: #818cf8;         /* Walkthrough Tag */
+  --accent-mint: #22c55e;
+
+  /* Tipografía y Contraste WCAG 2.2 */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-cyan: #38bdf8;
+  --text-red: #ef4444;
+  --text-amber: #f59e0b;
+  --text-green: #22c55e;
+  --text-mint: #22c55e;
+
+  /* Fuentes del Sistema */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.8125rem;   /* 13px */
+  --text-base: 0.9375rem; /* 15px */
+  --text-lg: 1.125rem;    /* 18px */
+  --text-xl: 1.25rem;     /* 20px */
+  --text-2xl: 1.5rem;     /* 24px */
+  --text-3xl: 1.875rem;   /* 30px */
+
+  /* Espaciado */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+
+  /* Bordes Redondeados TryHackMe */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  /* Chamfered corners (compatibilidad con elementos tácticos) */
+  --chamfer-sm: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+  --chamfer-md: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  --chamfer-lg: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+
+  /* Animaciones y Curvas */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --transition-fast: 140ms var(--ease-out);
+  --transition-normal: 220ms var(--ease-out);
+  --transition-flow: 350ms var(--ease-in-out);
+
+  /* Sombras TryHackMe */
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-tactical: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-elevated: 0 12px 36px rgba(0, 0, 0, 0.6);
+  --glow-mint: 0 0 16px rgba(34, 197, 94, 0.25);
+  --glow-green: 0 0 16px rgba(34, 197, 94, 0.28);
+  --glow-cyan: 0 0 20px rgba(56, 189, 248, 0.25);
+  --min-touch-target: 44px;
+}

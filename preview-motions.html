@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0c1017">
+  <title>CyberShield // Studio de Animaciones Vectoriales GSAP (Linear / Stripe Level)</title>
+
+  <!-- Tipografía Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Hojas de Estilo del Sistema -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/thm-room.css">
+  <link rel="stylesheet" href="css/gsap-motions.css">
+
+  <style>
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      padding: 32px 24px 80px 24px;
+    }
+
+    .studio-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .studio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 36px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-tactical);
+    }
+
+    .studio-title-box h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }
+
+    .studio-title-box p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      max-width: 700px;
+      line-height: 1.5;
+    }
+
+    .studio-meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: var(--radius-full);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-green);
+    }
+
+    .studio-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .studio-desc-bar {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+  </style>
+
+  <!-- GSAP Local para Cero Dependencias Externas -->
+  <script src="assets/vendor/gsap.min.js"></script>
+</head>
+<body>
+  <div class="studio-container">
+    <header class="studio-header">
+      <div class="studio-title-box">
+        <div class="studio-meta-badge">
+          <span>●</span>
+          <span>DIAGRAMAS VECTORIALES VIVOS // GSAP 3.12</span>
+        </div>
+        <h1 style="margin-top: 12px;">Studio de Movimiento Vectorial Embebido</h1>
+        <p>
+          Diagramas animados en SVG con aceleración por GPU, bucle fluido infinito, cero controles de video y pausa automática por <code style="color: var(--accent-cyan); font-family: var(--font-mono);">IntersectionObserver</code>. Diseñado bajo la dirección de arte de Stripe, Linear y Vercel.
+        </p>
+      </div>
+
+      <a href="index.html" class="thm-btn-submit" style="height: 40px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+        <span>Volver a la Sala ➔</span>
+      </a>
+    </header>
+
+    <div class="studio-grid">
+      <!-- 1. PHISHING PRISMA -->
+      <section class="gsap-motion-card">
+        <div class="gsap-motion-header">
+          <div class="gsap-motion-title">
+            <span class="gsap-motion-badge">TEMA 01</span>
+            <span>Refracción Forense de Phishing & Typosquatting</span>
+          </div>
+          <div class="gsap-motion-status">
+            <span class="gsap-pulse-dot"></span>
+            <span>GSAP EN BUCLE ACTIVO</span>
+          </div>
+        </div>
+
+        <div id="mount-phishing-prisma"></div>
+
+        <div class="gsap-motion-footer">
+          <span class="legend">Slug: <code>phishing-prisma</code> // Refracción cuántica de paquetes en 3.2s</span>
+          <span class="fps-pill">● 60 FPS GPU // IntersectionObserver Activo</span>
+        </div>
+      </section>
+
+      <!-- 2. IA SANITIZER -->
+      <section class="gsap-motion-card">
+        <div class="gsap-motion-header">
+          <div class="gsap-motion-title">
+            <span class="gsap-motion-badge">TEMA 02</span>
+            <span>Reactor Hexagonal & Bóveda Sanitizadora de IA</span>
+          </div>
+          <div class="gsap-motion-status">
+            <span class="gsap-pulse-dot"></span>
+            <span>GSAP EN BUCLE ACTIVO</span>
+          </div>
+        </div>
+
+        <div id="mount-ia-sanitizer"></div>
+
+        <div class="gsap-motion-footer">
+          <span class="legend">Slug: <code>ia-sanitizer</code> // Enmascaramiento de tokens y cero retención de memoria</span>
+          <span class="fps-pill">● 60 FPS GPU // IntersectionObserver Activo</span>
+        </div>
+      </section>
+
+      <!-- 3. USB CUARENTENA -->
+      <section class="gsap-motion-card">
+        <div class="gsap-motion-header">
+          <div class="gsap-motion-title">
+            <span class="gsap-motion-badge">TEMA 03</span>
+            <span>Cúpula Criogénica & Interrupción de Inyección BadUSB</span>
+          </div>
+          <div class="gsap-motion-status">
+            <span class="gsap-pulse-dot"></span>
+            <span>GSAP EN BUCLE ACTIVO</span>
+          </div>
+        </div>
+
+        <div id="mount-usb-cuarentena"></div>
+
+        <div class="gsap-motion-footer">
+          <span class="legend">Slug: <code>usb-cuarentena</code> // Aislamiento físico de periféricos desconocidos</span>
+          <span class="fps-pill">● 60 FPS GPU // IntersectionObserver Activo</span>
+        </div>
+      </section>
+
+      <!-- 4. RANSOMWARE CORTE -->
+      <section class="gsap-motion-card">
+        <div class="gsap-motion-header">
+          <div class="gsap-motion-title">
+            <span class="gsap-motion-badge">TEMA 04</span>
+            <span>Guillotina de Red en 60 Segundos & Respaldo Inmutable</span>
+          </div>
+          <div class="gsap-motion-status">
+            <span class="gsap-pulse-dot"></span>
+            <span>GSAP EN BUCLE ACTIVO</span>
+          </div>
+        </div>
+
+        <div id="mount-ransomware-corte"></div>
+
+        <div class="gsap-motion-footer">
+          <span class="legend">Slug: <code>ransomware-corte</code> // Corte de propagación lateral y onda de restauración</span>
+          <span class="fps-pill">● 60 FPS GPU // IntersectionObserver Activo</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Orquestador del Studio -->
+  <script type="module">
+    import { GsapMotionEngine } from './js/components/gsap-motion-engine.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const engine = new GsapMotionEngine();
+
+      engine.mount(document.getElementById('mount-phishing-prisma'), 'phishing-prisma');
+      engine.mount(document.getElementById('mount-ia-sanitizer'), 'ia-sanitizer');
+      engine.mount(document.getElementById('mount-usb-cuarentena'), 'usb-cuarentena');
+      engine.mount(document.getElementById('mount-ransomware-corte'), 'ransomware-corte');
+    });
+  </script>
+</body>
+</html>

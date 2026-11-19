@@ -1,0 +1,145 @@
+/**
+ * RESPONSIVE & ADAPTATIVE LAYOUT (WCAG 2.2 / Mobile-First)
+ * Breakpoints: 375px, 768px, 1024px, 1440px (PRD 04.3 & UI Pro Max)
+ */
+
+/* ==========================================================================
+   Móvil Compacto y Teléfonos (< 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .top-hud {
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--space-3);
+    gap: var(--space-3);
+  }
+
+  .hud-identity {
+    justify-content: space-between;
+  }
+
+  .hud-nav {
+    overflow-x: auto;
+    padding-bottom: var(--space-1);
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+
+  .station-tab-btn {
+    white-space: nowrap;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-xs);
+  }
+
+  .hud-telemetry {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .resilience-meter {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .main-stage {
+    padding: var(--space-4);
+  }
+
+  /* Estación 1: Visor */
+  .m1-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .m1-inbox-sidebar {
+    max-height: 240px;
+    overflow-y: auto;
+  }
+
+  .m1-actions-bar {
+    flex-direction: column-reverse;
+  }
+
+  .m1-actions-bar .btn-tactical {
+    width: 100%;
+  }
+
+  /* Estación 2: Aduana IA */
+  .m2-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  /* Estación 3: Escena Vectorial */
+  .m3-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .m3-canvas-wrapper {
+    height: 320px;
+  }
+
+  /* Estación 4: Consola de Crisis */
+  .m4-timeline-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .m4-actions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Diagnóstico Final */
+  .diag-hero-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: var(--space-4);
+    padding: var(--space-5);
+  }
+
+  .diag-kpis-row {
+    justify-content: center;
+  }
+
+  .diag-badges-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .diag-footer-actions {
+    flex-direction: column;
+  }
+}
+
+/* ==========================================================================
+   Tablets y Pantallas Medianas (769px a 1024px)
+   ========================================================================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .m1-layout {
+    grid-template-columns: 280px 1fr;
+  }
+
+  .m2-layout {
+    grid-template-columns: 300px 1fr;
+  }
+
+  .m3-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .diag-badges-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ==========================================================================
+   Móviles Muy Pequeños (375px y menores)
+   ========================================================================== */
+@media (max-width: 420px) {
+  .diag-badges-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .m4-timeline-bar {
+    grid-template-columns: 1fr;
+  }
+}

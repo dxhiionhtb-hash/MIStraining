@@ -1,0 +1,65 @@
+{
+  "language": "es",
+  "title": "Amenaza BadUSB: El Cebo Físico",
+  "topic": "badusb-alert",
+  "duration": 25.0,
+  "lead": 0.3,
+  "tail": 0.8,
+  "lines": [
+    {
+      "id": "find",
+      "scene": "sc-find",
+      "character": "Carlos",
+      "emotion": "curiosidad y sorpresa",
+      "text": "En el pasillo corporativo brilla una memoria USB metálica abandonada en el suelo.",
+      "t0": 0.0,
+      "t1": 5.0,
+      "sfx": "hallway-footsteps-shimmer",
+      "pause": 0.2
+    },
+    {
+      "id": "temptation",
+      "scene": "sc-temptation",
+      "character": "Carlos",
+      "emotion": "tentación y duda",
+      "text": "Tiene una etiqueta tentadora: bonos ejecutivos confidenciales del año.",
+      "t0": 5.0,
+      "t1": 10.0,
+      "sfx": "heartbeat-subtle-riser",
+      "pause": 0.2
+    },
+    {
+      "id": "danger",
+      "scene": "sc-danger",
+      "character": "Voz de Conciencia / Alerta",
+      "emotion": "alarma y peligro electromecánico",
+      "text": "¡Cuidado! No es un disco: es un microcontrolador que inyecta comandos como teclado.",
+      "t0": 10.0,
+      "t1": 15.0,
+      "sfx": "lightning-glitch-keyboard-furious",
+      "pause": 0.2
+    },
+    {
+      "id": "contain",
+      "scene": "sc-contain",
+      "character": "Carlos",
+      "emotion": "lucidez y responsabilidad",
+      "text": "Carlos no la conecta. La guarda en una bolsa antiestática de seguridad para el SOC.",
+      "t0": 15.0,
+      "t1": 20.0,
+      "sfx": "zipper-seal-drop",
+      "pause": 0.2
+    },
+    {
+      "id": "quarantine",
+      "scene": "sc-quarantine",
+      "character": "Sofía (SOC)",
+      "emotion": "victoria y protocolo cumplido",
+      "text": "Los cebos físicos explotan tu curiosidad. Jamás conectes dispositivos desconocidos.",
+      "t0": 20.0,
+      "t1": 25.0,
+      "sfx": "vault-lock-pneumatic-chime",
+      "pause": 0.4
+    }
+  ]
+}
